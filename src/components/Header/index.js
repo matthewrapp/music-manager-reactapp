@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 import './index.css';
 
-import { SettingOutlined, HomeOutlined } from '@ant-design/icons'; 
+import { SettingOutlined } from '@ant-design/icons'; 
 
 class AppHeader extends Component {
   render() {

@@ -2,7 +2,7 @@ import './index.css';
 import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, Button, FlexboxGrid, Container} from 'rsuite';
 import { Component } from 'react';
 import AppHeader from '../../components/Header'
-import AppFooter from '../../components/Footer';
+// import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';
 import { Redirect } from 'react-router';
@@ -24,7 +24,7 @@ class Login extends Component {
 
     componentDidMount = (e) => {
         // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-        if (document.cookie != null && document.cookie.split('=')[0] == 'auth') {
+        if (document.cookie != null && document.cookie.split('=')[0] === 'auth') {
             return this.setState({
                 ...this.state.formValue,
                 auth: true
@@ -40,8 +40,14 @@ class Login extends Component {
         }
 
         // reset input boxes 
-        this.state.formValue.email = ''
-        this.state.formValue.password = ''
+        // this.state.formValue.email = ''
+        // this.state.formValue.password = ''
+        this.setState({
+            formValue: {
+                email: '',
+                password: ''
+            }
+        })
 
         fetch('http://localhost:8080/api/login', {
             method: 'POST',
@@ -64,8 +70,9 @@ class Login extends Component {
             let d = new Date();
             d.setTime(d.getTime() + (5 * 24 * 60 * 1000));
             let expires = "expires=" + d.toUTCString();
-            document.cookie = `auth=${jsonData.token}` + ';' + expires + ";path=/";
-
+            // document.cookie = `auth=${jsonData.token}` + ';' + expires + ";path=/";
+            document.cookie = `auth=${jsonData.token};${expires};path=/`;
+            
             // set state to auth true
             this.setState({
                 ...this.state.formValue,
