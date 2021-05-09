@@ -1,11 +1,20 @@
 import './App.css';
+import { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <h4>Matthew here</h4>
-    </div>
-  );
+import Login from './pages/Login';
+import Error from './pages/Error';
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Switch>
+          <Route path='/' component={Login} exact />
+          <Route component={Error} />
+        </Switch>
+      </div>
+    )
+  }
 }
 
 export default App;
