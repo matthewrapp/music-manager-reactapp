@@ -49,7 +49,7 @@ class Login extends Component {
             }
         })
 
-        fetch('http://localhost:8080/api/login', {
+        fetch('https://music-manager--api.herokuapp.com/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
