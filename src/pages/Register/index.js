@@ -1,5 +1,5 @@
 import './index.css';
-import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, Button, FlexboxGrid, Container} from 'rsuite';
+import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import { Component } from 'react';
 import AppHeader from '../../components/Header'
 // import AppFooter from '../../components/Footer';
@@ -19,7 +19,8 @@ class Register extends Component {
                 confirmPassword: ''
             },
             auth: false,
-            successSignUp: false
+            successSignUp: false,
+            alreadySignedUp: false
         }
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
@@ -100,7 +101,7 @@ class Register extends Component {
         }
 
         return (
-            <div className="Login show-fake-browser login-page">
+            <div className="Register show-fake-browser login-page">
             <Container>
                 <AppHeader />
                 <Content>
@@ -137,11 +138,13 @@ class Register extends Component {
                                     <ButtonToolbar className="right">
                                         <Button classPrefix="orange-btn" onClick={this.handleSubmit} type="submit">Register</Button>
                                     </ButtonToolbar>
-                                    <ButtonToolbar className="center mt-20">
-                                        <Button classPrefix="grey-hyperlink">Already Have An Account? Register</Button>
-                                    </ButtonToolbar>
                                 </FormGroup>
                             </Form>
+                            <ButtonToolbar className="center mt-20">
+                                <ButtonGroup vertical>   
+                                    <Button appearance="subtle" href="http://localhost:3000/">Already Have An Account? Register</Button>
+                                </ButtonGroup>     
+                            </ButtonToolbar>
                             </Panel>
                         </FlexboxGrid.Item>
                     </FlexboxGrid>

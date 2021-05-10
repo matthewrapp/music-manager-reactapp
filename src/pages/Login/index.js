@@ -1,5 +1,5 @@
 import './index.css';
-import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, Button, FlexboxGrid, Container} from 'rsuite';
+import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import { Component } from 'react';
 import AppHeader from '../../components/Header'
 // import AppFooter from '../../components/Footer';
@@ -15,7 +15,9 @@ class Login extends Component {
                 email: '',
                 password: ''
             },
-            auth: false
+            auth: false,
+            notSignedUp: false,
+            forgotPassword: false
         }
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
@@ -46,7 +48,8 @@ class Login extends Component {
             formValue: {
                 email: '',
                 password: ''
-            }
+            },
+            ...this.state.auth
         })
 
         fetch('https://music-manager--api.herokuapp.com/api/login', {
@@ -91,8 +94,6 @@ class Login extends Component {
             return ( <Redirect to='/admin/dashboard' /> )
         }
 
-    
-
         return (
             <div className="Login show-fake-browser login-page">
             <Container>
@@ -119,12 +120,14 @@ class Login extends Component {
                                     <ButtonToolbar className="right">
                                         <Button classPrefix="orange-btn" onClick={this.handleSubmit} type="submit">Sign in</Button>
                                     </ButtonToolbar>
-                                    <ButtonToolbar className="center mt-20">
-                                        <Button classPrefix="grey-hyperlink">Forgot Your Password?</Button>
-                                        <Button classPrefix="grey-hyperlink">Don't Have An Account? Register</Button>
-                                    </ButtonToolbar>
                                 </FormGroup>
                             </Form>
+                            <ButtonToolbar className="center mt-20">
+                                <ButtonGroup vertical>   
+                                    <Button appearance="subtle">Forgot Your Password?</Button>
+                                    <Button appearance="subtle" href="http://localhost:3000/register">Don't Have An Account? Register</Button>
+                                </ButtonGroup>     
+                            </ButtonToolbar>
                             </Panel>
                         </FlexboxGrid.Item>
                     </FlexboxGrid>

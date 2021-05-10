@@ -21,14 +21,9 @@
   font-size: 12px;
 }
 
-.rs-grey-hyperlink {
-  color: rgb(213, 213, 213);
-  border: 0px;
-  margin-top: 26px;
-  text-align: center;
-  background: transparent;
-  text-transform: uppercase;
-  font-size: 12px;
+.rs-btn-subtle:hover {
+  background: none !important;
+  color: #fff !important;
 }
 
 .right {
