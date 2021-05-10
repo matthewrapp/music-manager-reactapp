@@ -88,7 +88,6 @@ class Login extends Component {
     
     render() {
         if (this.state.auth) {
-            console.log(this.state.auth);
             return ( <Redirect to='/admin/dashboard' /> )
         }
 
