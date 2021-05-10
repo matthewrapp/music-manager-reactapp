@@ -142,7 +142,7 @@ class Register extends Component {
                             </Form>
                             <ButtonToolbar className="center mt-20">
                                 <ButtonGroup vertical>   
-                                    <Button appearance="subtle" href="http://localhost:3000/">Already Have An Account? Register</Button>
+                                    <Button appearance="subtle" href="https://music-manager--api.herokuapp.com/">Already Have An Account? Register</Button>
                                 </ButtonGroup>     
                             </ButtonToolbar>
                             </Panel>

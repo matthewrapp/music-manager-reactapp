@@ -125,7 +125,7 @@ class Login extends Component {
                             <ButtonToolbar className="center mt-20">
                                 <ButtonGroup vertical>   
                                     <Button appearance="subtle">Forgot Your Password?</Button>
-                                    <Button appearance="subtle" href="http://localhost:3000/register">Don't Have An Account? Register</Button>
+                                    <Button appearance="subtle" href="https://music-manager--api.herokuapp.com/register">Don't Have An Account? Register</Button>
                                 </ButtonGroup>     
                             </ButtonToolbar>
                             </Panel>
