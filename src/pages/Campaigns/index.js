@@ -23,9 +23,8 @@ class Campaigns extends Component {
         fetch(`${process.env.REACT_APP_API}/api/artists`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
+                'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+            }
         })
             .then(user => {
                 return user.json()
