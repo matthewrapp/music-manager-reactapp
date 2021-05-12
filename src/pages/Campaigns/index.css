@@ -1,0 +1,12 @@
+.Campaigns .rs-panel {
+  max-width: 90%;
+  margin: 20px auto;
+  background-color: rgb(48, 48, 48);
+}
+
+.Campaigns h4 {
+  color: #fff;
+}
+.Campaigns p {
+  color: rgb(214, 214, 214);
+}

@@ -1,5 +1,5 @@
 import './index.css';
-import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
+import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import { Component } from 'react';
 import AppHeader from '../../components/Header'
 // import AppFooter from '../../components/Footer';
@@ -18,25 +18,11 @@ class Register extends Component {
                 password: '',
                 confirmPassword: ''
             },
-            auth: false,
-            successSignUp: false,
-            alreadySignedUp: false
+            successSignUp: false
         }
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
         // this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    componentDidMount = (e) => {
-        // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-        if (document.cookie != null && document.cookie.split('=')[0] === 'auth') {
-            return this.setState({
-                ...this.state.formValue,
-                auth: true,
-                ...this.state.successSignUp
-            })
-        }
-        return
     }
 
     handleSubmit = (e) => {
@@ -56,10 +42,11 @@ class Register extends Component {
                 email: '',
                 password: '',
                 confirmPassword: ''
-            }
+            },
+            ...this.state.successSignUp
         })
 
-        fetch('https://music-manager--api.herokuapp.com/api/register', {
+        fetch(process.env.REACT_APP_API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -80,7 +67,6 @@ class Register extends Component {
 
             this.setState({
                 ...this.state.formValue,
-                ...this.state.auth,
                 successSignUp: true
             })
 
@@ -94,10 +80,6 @@ class Register extends Component {
     render() {
         if (this.state.successSignUp) {
             return ( <Redirect to='/' /> )
-        }
-
-        if (this.state.auth) {
-            return ( <Redirect to='/admin/dashboard' /> )
         }
 
         return (
@@ -115,28 +97,28 @@ class Register extends Component {
                                     this.form = ref;
                             }} onChange={formValue => { this.setState({ formValue }) }} formValue={this.state.formValue} fluid>
                                 <FormGroup>
-                                    <FormControlLabel>First Name</FormControlLabel>
+                                    <ControlLabel>First Name</ControlLabel>
                                     <FormControl name="firstName" type="text" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <FormControlLabel>Last Name</FormControlLabel>
+                                    <ControlLabel>Last Name</ControlLabel>
                                     <FormControl name="lastName" type="text" />
                                 </FormGroup>        
                                 <FormGroup>
-                                    <FormControlLabel>Email address</FormControlLabel>
+                                    <ControlLabel>Email address</ControlLabel>
                                     <FormControl name="email" type="email" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <FormControlLabel>Password</FormControlLabel>
+                                    <ControlLabel>Password</ControlLabel>
                                     <FormControl name="password" type="password" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <FormControlLabel>Confirm Password</FormControlLabel>
+                                    <ControlLabel>Confirm Password</ControlLabel>
                                     <FormControl name="confirmPassword" type="password" />
                                 </FormGroup>
                                 <FormGroup>
                                     <ButtonToolbar className="right">
-                                        <Button classPrefix="orange-btn" onClick={this.handleSubmit} type="submit">Register</Button>
+                                        <Button classPrefix="rs-orange-btn" onClick={this.handleSubmit} type="submit">Register</Button>
                                     </ButtonToolbar>
                                 </FormGroup>
                             </Form>

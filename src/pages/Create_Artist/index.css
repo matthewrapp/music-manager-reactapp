@@ -1,0 +1,35 @@
+.CreateArtist .background-img {
+  background-position: 20% 0%;
+  background-size: cover;
+}
+
+.CreateArtist .col-item {
+  height: 800px;
+  padding: 40px 60px;
+}
+
+.CreateArtist .rs-panel {
+  background: transparent !important;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.CreateArtist .rs-panel-title {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.CreateArtist .rs-form-control-label {
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 12px;
+  padding-bottom: 5px;
+}
+
+.CreateArtist .rs-input {
+  border-radius: 0px !important;
+  background: transparent !important;
+  border: 1px solid rgb(92, 92, 92) !important;
+}

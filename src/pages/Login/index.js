@@ -1,11 +1,10 @@
 import './index.css';
-import { Col, Content, Panel, Form, FormGroup, FormControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
-import { Component } from 'react';
+import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
+import React, { Component } from 'react';
 import AppHeader from '../../components/Header'
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';
-import { Redirect } from 'react-router';
 
 class Login extends Component {
     constructor(props) {
@@ -15,10 +14,9 @@ class Login extends Component {
                 email: '',
                 password: ''
             },
-            auth: false,
             notSignedUp: false,
-            forgotPassword: false
-        }
+            errMessage: false
+        };
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
         // this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,12 +24,14 @@ class Login extends Component {
 
     componentDidMount = (e) => {
         // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-        if (document.cookie != null && document.cookie.split('=')[0] === 'auth') {
-            return this.setState({
+        if (this.props.location.state.message !== null || this.props.location.state.message !== '' || this.props.location.state.message !== undefined) {
+            this.setState({
                 ...this.state.formValue,
-                auth: true
+                ...this.state.notSignedUp,
+                errMessage: true
             })
         }
+
         return
     }
 
@@ -42,17 +42,16 @@ class Login extends Component {
         }
 
         // reset input boxes 
-        // this.state.formValue.email = ''
-        // this.state.formValue.password = ''
         this.setState({
             formValue: {
                 email: '',
                 password: ''
             },
-            ...this.state.auth
+            ...this.state.notSignedUp,
+            ...this.state.errMessage
         })
 
-        fetch('https://music-manager--api.herokuapp.com/api/login', {
+        fetch(process.env.REACT_APP_API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,6 +63,7 @@ class Login extends Component {
             return jsonData;
         })
         .then(jsonData => {
+            console.log(jsonData)
             if (jsonData.isAuth !== true) {
                 alert(jsonData.message);
                 return
@@ -76,12 +76,6 @@ class Login extends Component {
             // document.cookie = `auth=${jsonData.token}` + ';' + expires + ";path=/";
             document.cookie = `auth=${jsonData.token};${expires};path=/`;
             
-            // set state to auth true
-            this.setState({
-                ...this.state.formValue,
-                auth: true
-            })
-            
             return
         })
         .catch(err => {
@@ -90,12 +84,9 @@ class Login extends Component {
     }
     
     render() {
-        if (this.state.auth) {
-            return ( <Redirect to='/admin/dashboard' /> )
-        }
-
         return (
             <div className="Login show-fake-browser login-page">
+            {/* {this.state.errMessage ? (<Notification type="error" placement="bottomEnd" closable>{this.props.location.state.message}</Notification>) : null} */}
             <Container>
                 <AppHeader />
                 <Content>
@@ -103,22 +94,22 @@ class Login extends Component {
                         <FlexboxGrid.Item className="col-item background-img" as={Col} colspan={24} md={12} order={2} style={{backgroundImage: `url(${backgroundImg})`}}>
                             {/* Background Image Goes Here */}
                         </FlexboxGrid.Item>
-                        <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
+                            <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
                             <Panel header={<h3>Login</h3>}>
                             <Form ref={(ref) => {
                                     this.form = ref;
-                            }} onChange={formValue => { this.setState({ formValue }) }} formValue={this.state.formValue} fluid>
+                                    }} onChange={formValue => { this.setState({ formValue }) }} formValue={this.state.formValue} fluid>
                                 <FormGroup>
-                                    <FormControlLabel>Email address</FormControlLabel>
+                                    <ControlLabel>Email address</ControlLabel>
                                     <FormControl name="email" type="email" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <FormControlLabel>Password</FormControlLabel>
+                                    <ControlLabel>Password</ControlLabel>
                                     <FormControl name="password" type="password" />
                                 </FormGroup>
                                 <FormGroup>
                                     <ButtonToolbar className="right">
-                                        <Button classPrefix="orange-btn" onClick={this.handleSubmit} type="submit">Sign in</Button>
+                                        <Button classPrefix="rs-orange-btn" onClick={this.handleSubmit} type="submit">Sign in</Button>
                                     </ButtonToolbar>
                                 </FormGroup>
                             </Form>
