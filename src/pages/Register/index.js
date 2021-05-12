@@ -46,7 +46,7 @@ class Register extends Component {
             ...this.state.successSignUp
         })
 
-        fetch(process.env.REACT_APP_API, {
+        fetch(`${process.env.REACT_APP_API}/api/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

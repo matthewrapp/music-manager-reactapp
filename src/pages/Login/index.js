@@ -51,7 +51,7 @@ class Login extends Component {
             ...this.state.errMessage
         })
 
-        fetch(process.env.REACT_APP_API, {
+        fetch(`${process.env.REACT_APP_API}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

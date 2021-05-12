@@ -20,7 +20,7 @@ class Campaigns extends Component {
     componentDidMount = (e) => {
         // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
             // that means that we are authenticated, now check to see if there are artists...
-        fetch(process.env.REACT_APP_API, {
+        fetch(`${process.env.REACT_APP_API}/api/artists`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
