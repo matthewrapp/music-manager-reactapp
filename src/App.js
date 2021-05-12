@@ -21,7 +21,6 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          
           <Route path='/' component={Login} exact />
           <Route path='/register' component={Register} />
           <Route path='/admin/create-artist' component={auth(CreateArtist)} />
