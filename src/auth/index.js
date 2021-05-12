@@ -15,7 +15,10 @@ function auth(ComponentToProtect) {
       
         componentDidMount() {
             // create a route within the server to validate token
-            fetch(`${process.env.REACT_APP_API}/api/check-token`)
+            fetch(`${process.env.REACT_APP_API}/api/check-token`, {
+                method: 'GET',
+                credentials: 'include'
+            })
                 .then(res => {
                     if (res.status === 200) {
                         this.setState({ loading: false });
