@@ -22,18 +22,18 @@ class Login extends Component {
         // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    componentDidMount = (e) => {
-        // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-        if (this.props.location.state.message !== null || this.props.location.state.message !== '' || this.props.location.state.message !== undefined) {
-            this.setState({
-                ...this.state.formValue,
-                ...this.state.notSignedUp,
-                errMessage: true
-            })
-        }
+    // componentDidMount = (e) => {
+    //     // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
+    //     if (this.props.location.state.message !== null || this.props.location.state.message !== '' || this.props.location.state.message !== undefined) {
+    //         this.setState({
+    //             ...this.state.formValue,
+    //             ...this.state.notSignedUp,
+    //             errMessage: true
+    //         })
+    //     }
 
-        return
-    }
+    //     return
+    // }
 
     handleSubmit = (e) => {
         let data = {
