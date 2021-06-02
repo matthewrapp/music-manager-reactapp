@@ -1,16 +1,20 @@
 import './index.css';
-import { Row, Col, Content, Panel, Button, FlexboxGrid, Container} from 'rsuite';
+import { Row, Col, Content, Panel, Button, FlexboxGrid, Container } from 'rsuite';
+import FlexboxGridItem from 'rsuite/es/FlexboxGrid/FlexboxGridItem';
 import { Component } from 'react';
 import AppHeader from '../../components/Header'
 // import AppFooter from '../../components/Footer';
+import CampaignCard from '../../components/Card/CampaignCard'
 
-import FlexboxGridItem from 'rsuite/es/FlexboxGrid/FlexboxGridItem';
-
+/*
+This class displays all the campaigns/songs related to the user/artists
+*/
 class Campaigns extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numOfArtists: 0
+            numOfArtists: 0,
+            artists: []
         }
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
@@ -75,7 +79,8 @@ class Campaigns extends Component {
             <Container>
                 <AppHeader />
                 <Content>
-                    <h1>Hello, this is the campaigns page.</h1>
+                        <CampaignCard campaignId='123' status='active' date={Date.now()} campaignTitle='Whatttt a doo!' />
+                        <img src="/images/2021-05-19T05:15:55.868Z-Fabulous_Artwork-04.png" />
                 </Content>
                 {/* <AppFooter /> */}
             </Container>

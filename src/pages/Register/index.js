@@ -54,12 +54,11 @@ class Register extends Component {
             body: JSON.stringify(data)
         })
         .then(data => {
-            console.log(data);
             const jsonData = data.json();
             return jsonData;
         })
         .then(jsonData => {
-            
+            console.log(jsonData)
             if (jsonData.message) {
                 alert(jsonData.message);
                 return
@@ -124,7 +123,7 @@ class Register extends Component {
                             </Form>
                             <ButtonToolbar className="center mt-20">
                                 <ButtonGroup vertical>   
-                                    <Button appearance="subtle" href="https://music-manager--api.herokuapp.com/">Already Have An Account? Register</Button>
+                                    <Button appearance="subtle" href="/">Already Have An Account? Login</Button>
                                 </ButtonGroup>     
                             </ButtonToolbar>
                             </Panel>

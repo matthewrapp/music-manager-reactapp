@@ -1,10 +1,11 @@
 import './index.css';
 import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import React, { Component } from 'react';
-import AppHeader from '../../components/Header'
+import AppHeader from '../../components/Header';
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';
+import { Redirect } from 'react-router';
 
 class Login extends Component {
     constructor(props) {
@@ -14,26 +15,32 @@ class Login extends Component {
                 email: '',
                 password: ''
             },
-            notSignedUp: false,
+            isAuth: false,
             errMessage: false
         };
-        // HandleSubmit relies on this.state
-        // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
-        // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    // componentDidMount = (e) => {
-    //     // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-    //     if (this.props.location.state.message !== null || this.props.location.state.message !== '' || this.props.location.state.message !== undefined) {
-    //         this.setState({
-    //             ...this.state.formValue,
-    //             ...this.state.notSignedUp,
-    //             errMessage: true
-    //         })
-    //     }
+    componentDidMount = (e) => {
+        // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
+        // if (this.props.location.state.message !== null || this.props.location.state.message !== '' || this.props.location.state.message !== undefined) {
+        //     this.setState({
+        //         ...this.state.formValue,
+        //         ...this.state.notSignedUp,
+        //         errMessage: true
+        //     })
+        // }
 
-    //     return
-    // }
+        // document.cookie.split(';').find(cookies => {
+        //     if (cookies.split('=')[0].trim() === 'auth') {
+        //         this.setState({
+        //             ...this.state.formValue,
+        //             isAuth: true,
+        //             ...this.state.errMessage
+        //         })
+        //     }
+        // });
+
+    }
 
     handleSubmit = (e) => {
         let data = {
@@ -47,7 +54,7 @@ class Login extends Component {
                 email: '',
                 password: ''
             },
-            ...this.state.notSignedUp,
+            ...this.state.isAuth,
             ...this.state.errMessage
         })
 
@@ -63,7 +70,6 @@ class Login extends Component {
             return jsonData;
         })
         .then(jsonData => {
-            console.log(jsonData)
             if (jsonData.isAuth !== true) {
                 alert(jsonData.message);
                 return
@@ -76,6 +82,12 @@ class Login extends Component {
             // document.cookie = `auth=${jsonData.token}` + ';' + expires + ";path=/";
             document.cookie = `auth=${jsonData.token};${expires};path=/`;
             
+            this.setState({
+                ...this.state.formValue,
+                isAuth: true,
+                ...this.state.errMessage
+            })
+
             return
         })
         .catch(err => {
@@ -84,6 +96,14 @@ class Login extends Component {
     }
     
     render() {
+        if (this.state.isAuth) {
+            return (
+                <Redirect to={{
+                    pathname: '/admin/campaigns',
+                }} />
+            )
+        }
+
         return (
             <div className="Login show-fake-browser login-page">
             {/* {this.state.errMessage ? (<Notification type="error" placement="bottomEnd" closable>{this.props.location.state.message}</Notification>) : null} */}
@@ -116,7 +136,10 @@ class Login extends Component {
                             <ButtonToolbar className="center mt-20">
                                 <ButtonGroup vertical>   
                                     <Button appearance="subtle">Forgot Your Password?</Button>
-                                    <Button appearance="subtle" href="https://music-manager--api.herokuapp.com/register">Don't Have An Account? Register</Button>
+                                    {/* <Button appearance="subtle">
+                                        <Link to="/register">Don't Have An Account? Register</Link>
+                                    </Button> */}
+                                    <Button appearance="subtle" href="/register">Don't Have An Account? Register</Button>
                                 </ButtonGroup>     
                             </ButtonToolbar>
                             </Panel>

@@ -17,15 +17,16 @@ class Step1 extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Artist Bio</ControlLabel>
-                    <FormControl name="artistBio" type="text" />
+                    <FormControl name="artistBio" type="text" rows={7} componentClass="textarea"/>
                 </FormGroup>
                 <FormGroup>
                     <ButtonToolbar className="right">
-                        <Button classPrefix="orange-btn" onClick={this.props.onClick} type="submit" name="next">Next</Button>
+                        <Button classPrefix="rs-orange-btn" onClick={this.props.onClick} type="submit" name="next" disabled={this.props.error}>Next</Button>
                     </ButtonToolbar>
                 </FormGroup>
             </div>
         )    
+
     }
 }
 

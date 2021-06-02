@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { authCookie } from '../helper';
 
 function auth(ComponentToProtect) {
 
@@ -15,11 +16,29 @@ function auth(ComponentToProtect) {
       
         componentDidMount() {
             // create a route within the server to validate token
-            console.log(document.cookie);
+            // const authCookie = document.cookie.split(';').find(cookies => {
+            //     if (cookies.split('=')[0].trim() === 'auth') {
+            //         this.setState({
+            //             ...this.state.loading,
+            //             ...this.state.redirect,
+            //             errMsg: 'No authentication.'
+            //         })
+            //         return cookies
+            //     } else {
+            //         this.setState({
+            //             ...this.state.loading,
+            //             ...this.state.redirect,
+            //             errMsg: 'No authentication.'
+            //         })
+            //         throw new Error(this.state.errMsg);
+            //     }
+            // });
+            const token = authCookie(document.cookie);
+
             fetch(`${process.env.REACT_APP_API}/api/check-token`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+                    'Authorization': `Bearer ${token.split('=')[1]}`
                 }
             })
                 .then(res => {
@@ -36,8 +55,6 @@ function auth(ComponentToProtect) {
                     }
                 })
                 .catch(err => {
-                    console.error(err);
-                    console.log(this.state);
                     this.setState({ loading: false, redirect: true, ...this.state.errMsg });
                 });
         }

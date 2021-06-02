@@ -3,12 +3,14 @@ import { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import auth from './auth';
+// import checkAuth from './checkAuth';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateArtist from './pages/Create_Artist';
 import Campaigns from './pages/Campaigns';
 import Error from './pages/Error';
+
 class App extends Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,5 @@
 import '../index.css';
-import {FormGroup, ControlLabel, FormControl, ButtonToolbar, Button} from 'rsuite';
+import {FormGroup, ControlLabel, FormControl, ButtonToolbar, Button, Uploader} from 'rsuite';
 import { Component } from 'react';
 
 class Step2 extends Component {
@@ -13,20 +13,20 @@ class Step2 extends Component {
             <div className="Step2 show-fake-browser login-page">
                 <FormGroup>
                     <ControlLabel>Facebook</ControlLabel>
-                    <FormControl name="facebook" type="text" />
+                    <FormControl name="facebook" type="url" />
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Instagram</ControlLabel>
-                    <FormControl name="instagram" type="text" />
+                    <FormControl name="instagram" type="url" />
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Soundcloud</ControlLabel>
-                    <FormControl name="soundcloud" type="text" />
+                    <FormControl name="soundcloud" type="url" />
                 </FormGroup>
                 <FormGroup>
                     <ButtonToolbar className="right">
-                        <Button classPrefix="orange-btn" onClick={this.props.onClick} type="submit" name="prev">Previous</Button>
-                        <Button classPrefix="orange-btn" onClick={this.props.onClick} type="submit" name="submit">Finish</Button>
+                        <Button classPrefix="rs-orange-btn" onClick={this.props.onClick} type="submit" name="prev">Previous</Button>
+                        <Button classPrefix="rs-orange-btn" onClick={this.props.onClick} type="submit" name="submit" disabled={this.props.error}>Finish</Button>
                     </ButtonToolbar>
                 </FormGroup>
                                 
