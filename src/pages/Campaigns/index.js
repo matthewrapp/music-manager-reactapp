@@ -2,9 +2,12 @@ import './index.css';
 import { Row, Col, Content, Panel, Button, FlexboxGrid, Container } from 'rsuite';
 import FlexboxGridItem from 'rsuite/es/FlexboxGrid/FlexboxGridItem';
 import { Component } from 'react';
-import AppHeader from '../../components/Header'
+import AppHeader from '../../components/Header/Auth_Header'
 // import AppFooter from '../../components/Footer';
-import CampaignCard from '../../components/Card/CampaignCard'
+import CampaignCard from '../../components/Card/CampaignCard';
+import PageNav from '../../components/PageNav';
+
+import { authCookie } from '../../helper';
 
 /*
 This class displays all the campaigns/songs related to the user/artists
@@ -13,8 +16,8 @@ class Campaigns extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numOfArtists: 0,
-            artists: []
+            numOfCampaigns: 0,
+            campaigns: []
         }
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
@@ -24,23 +27,29 @@ class Campaigns extends Component {
     componentDidMount = (e) => {
         // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
             // that means that we are authenticated, now check to see if there are artists...
-        fetch(`${process.env.REACT_APP_API}/api/artists`, {
+        
+        // issue is I need to select the right cookie to split and send in authorization
+        const token = authCookie(document.cookie);
+        fetch(`${process.env.REACT_APP_API}/api/get-campaigns`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+                'Authorization': `Bearer ${token.split('=')[1]}`
             }
         })
-            .then(user => {
-                return user.json()
+            .then(campaigns => {
+                return campaigns.json()
             })
-            .then(user => {
-                if (user.artists.length < 1) {
+            .then(campaigns => {
+                console.log(campaigns.campaigns)
+                if (campaigns.campaigns.length < 1) {
                     return this.setState({
-                        ...this.state.numOfArtists
+                        ...this.state.numOfArtists,
+                        ...this.state.artists
                     })
                 }
                 return this.setState({
-                    numOfArtists: user.artists.length
+                    numOfCampaigns: campaigns.campaigns.length,
+                    campaigns: campaigns.campaigns
                 })
             })
     }
@@ -73,14 +82,31 @@ class Campaigns extends Component {
                 </div>
             )
         }
+
+        const btnArray = [
+            {
+                btnValue: 'View All Campaigns',
+                btnLink: 'https://facebook.com/',
+                btnClassPrefix: 'rs-blue-btn' 
+            },
+            {
+                btnValue: 'Create New Campaign',
+                btnLink: 'https://instagram.com/',
+                btnClassPrefix: 'rs-green-btn' 
+            }
+        ]
         
         return (
             <div className="Campaigns">
             <Container>
                 <AppHeader />
-                <Content>
-                        <CampaignCard campaignId='123' status='active' date={Date.now()} campaignTitle='Whatttt a doo!' />
-                        <img src="/images/2021-05-19T05:15:55.868Z-Fabulous_Artwork-04.png" />
+                    <Content>
+                        <PageNav pageName="Campaigns" btns={btnArray} />
+                        <FlexboxGrid className="CampaignCard" justify="start">
+                            {this.state.campaigns.map(campaign => {
+                                return <CampaignCard campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
+                            })}
+                        </FlexboxGrid>        
                 </Content>
                 {/* <AppFooter /> */}
             </Container>

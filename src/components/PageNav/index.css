@@ -1,0 +1,35 @@
+.PageNav .navbar-brand {
+  position: relative;
+  top: 22%;
+  font-size: 22px;
+  display: inline-block;
+  padding: 0 18px;
+  font-style: italic;
+}
+
+.PageNav .navbar-brand:hover {
+  text-decoration: none;
+}
+
+.PageNav .rs-navbar {
+  padding-top: 40px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+.PageNav .rs-navbar ul li {
+  margin-left: 18px;
+}
+
+.PageNav .rs-navbar-header a,
+.PageNav .rs-navbar-body a {
+  color: #fff !important;
+}
+
+.PageNav .page-title {
+  margin-top: 14px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 18px;
+}

@@ -1,7 +1,7 @@
 import './index.css';
 import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import React, { Component } from 'react';
-import AppHeader from '../../components/Header';
+import AppHeader from '../../components/Header/NotAuth_Header';
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';
@@ -18,28 +18,6 @@ class Login extends Component {
             isAuth: false,
             errMessage: false
         };
-    }
-
-    componentDidMount = (e) => {
-        // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-        // if (this.props.location.state.message !== null || this.props.location.state.message !== '' || this.props.location.state.message !== undefined) {
-        //     this.setState({
-        //         ...this.state.formValue,
-        //         ...this.state.notSignedUp,
-        //         errMessage: true
-        //     })
-        // }
-
-        // document.cookie.split(';').find(cookies => {
-        //     if (cookies.split('=')[0].trim() === 'auth') {
-        //         this.setState({
-        //             ...this.state.formValue,
-        //             isAuth: true,
-        //             ...this.state.errMessage
-        //         })
-        //     }
-        // });
-
     }
 
     handleSubmit = (e) => {
@@ -81,6 +59,9 @@ class Login extends Component {
             let expires = "expires=" + d.toUTCString();
             // document.cookie = `auth=${jsonData.token}` + ';' + expires + ";path=/";
             document.cookie = `auth=${jsonData.token};${expires};path=/`;
+
+            // set cookie with default artist
+            document.cookie=`artistId=${jsonData.selectedArtist}`
             
             this.setState({
                 ...this.state.formValue,

@@ -130,7 +130,7 @@ class CreateArtist extends Component {
             )
         }
 
-        const { formError } = this.state;
+        // const { formError } = this.state;
 
         const model = Schema.Model({
             artistName: StringType().isRequired('This field is required.'),
@@ -151,10 +151,10 @@ class CreateArtist extends Component {
                                 <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
                                 <Panel header={<h3>Create Artist, Step {this.state.currentStep}</h3>}>
                                     <Form model={model} onChange={formValue => { this.setState({ formValue }) }} onCheck={formError => {this.setState({formError: formError, hasValidationError: (Object.keys(formError).length === 0 ? false : true)})}} formValue={this.props.formValue} fluid>
-                                            <Step1 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} artistName={this.state.formValue.artistName} artistBio={this.state.formValue.artistBio} />
-                                            <Step2 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} facebook={this.state.formValue.facebook} instagram={this.state.formValue.instagram} soundcloud={this.state.formValue.soundcloud} />
-                                        </Form>
-                                    </Panel>
+                                        <Step1 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} artistName={this.state.formValue.artistName} artistBio={this.state.formValue.artistBio} />
+                                        <Step2 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} facebook={this.state.formValue.facebook} instagram={this.state.formValue.instagram} soundcloud={this.state.formValue.soundcloud} />
+                                    </Form>
+                                </Panel>
                                 </FlexboxGrid.Item>
                             </FlexboxGrid>
                         </Content>

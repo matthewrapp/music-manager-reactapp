@@ -15,10 +15,30 @@
 .rs-orange-btn {
   background-color: rgba(255, 125, 38, 0.3);
   border: 1px solid rgb(255, 125, 38);
-  padding: 20px 40px;
+  padding: 10px 40px;
   color: white;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 10px;
+  display: inline-block;
+}
+
+.rs-blue-btn {
+  background-color: rgba(57, 153, 255, 0.3);
+  border: 1px solid rgb(57, 153, 255);
+  padding: 10px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 10px;
+  display: inline-block;
+}
+
+.rs-green-btn {
+  background-color: rgba(44, 209, 58, 0.3);
+  border: 1px solid rgb(44, 209, 58);
+  padding: 10px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 10px;
   display: inline-block;
 }
 

@@ -1,4 +1,4 @@
-.navbar-brand {
+.Header .navbar-brand {
   position: relative;
   top: 22%;
   font-size: 22px;
@@ -7,16 +7,16 @@
   font-style: italic;
 }
 
-.navbar-brand:hover {
+.Header .navbar-brand:hover {
   text-decoration: none;
 }
 
-.rs-navbar {
+.Header .rs-navbar {
   border-bottom: 1px solid rgb(49, 49, 49);
   padding: 6px 0;
 }
 
-.rs-navbar-header a,
-.rs-navbar-body a {
+.Header .rs-navbar-header a,
+.Header .rs-navbar-body a {
   color: #fff !important;
 }

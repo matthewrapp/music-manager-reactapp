@@ -1,7 +1,7 @@
 import './index.css';
 import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import { Component } from 'react';
-import AppHeader from '../../components/Header'
+import AppHeader from '../../components/Header/NotAuth_Header'
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';

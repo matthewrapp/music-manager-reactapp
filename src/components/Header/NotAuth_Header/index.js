@@ -1,7 +1,7 @@
 import { Header, Navbar, Nav } from 'rsuite';
 import { Component } from 'react';
 
-import './index.css';
+import '../index.css';
 
 import { SettingOutlined } from '@ant-design/icons'; 
 
