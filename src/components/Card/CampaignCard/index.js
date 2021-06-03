@@ -7,8 +7,8 @@ class CampaignCard extends Component {
     render() {
         return (
         
-              <FlexboxGrid.Item colspan={6} className="card-col">
-                  <a href={'/campaign/' + this.props.campaignId} id={this.props.campaignId}>
+              <FlexboxGrid.Item colspan={6} className="card-col" >
+                  <a href={'/campaign/' + this.props.campaignId}>
                   {/* <a href={router.base_url + '/campaign/' + this.props.campaignId}> */}
                     {/* <Panel header={this.props.status + ' | ' + this.props.date} shaded>
                       <h2>{this.props.campaignTitle}</h2>

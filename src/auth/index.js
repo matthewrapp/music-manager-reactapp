@@ -14,26 +14,8 @@ function auth(ComponentToProtect) {
             };
         }
       
-        componentDidMount() {
-            // create a route within the server to validate token
-            // const authCookie = document.cookie.split(';').find(cookies => {
-            //     if (cookies.split('=')[0].trim() === 'auth') {
-            //         this.setState({
-            //             ...this.state.loading,
-            //             ...this.state.redirect,
-            //             errMsg: 'No authentication.'
-            //         })
-            //         return cookies
-            //     } else {
-            //         this.setState({
-            //             ...this.state.loading,
-            //             ...this.state.redirect,
-            //             errMsg: 'No authentication.'
-            //         })
-            //         throw new Error(this.state.errMsg);
-            //     }
-            // });
-            const token = authCookie(document.cookie);
+        async componentDidMount() {
+            const token = await authCookie(document.cookie).then(t => t);
 
             fetch(`${process.env.REACT_APP_API}/api/check-token`, {
                 method: 'GET',

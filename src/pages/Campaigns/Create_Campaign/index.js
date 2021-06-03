@@ -29,9 +29,24 @@ class CreateCampaign extends Component {
         // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit = (e) => {
-        const token = authCookie(document.cookie);
-        const artistId = artistIdCookie(document.cookie);
+    async componentDidMount() {
+        // const token = await authCookie(document.cookie).then(t => t);
+        // const artistId = await artistIdCookie(document.cookie).then(a => a);
+        // this.setState({
+        //     ...this.state.formValue,
+        //     ...this.state.formError,
+        //     ...this.state.hasValidationError,
+        //     ...this.state.success,
+        //     token: `Bearer ${token.split('=')[1]}`,
+        //     artistId: artistId.split('=')[1]
+        // })
+
+        // console.log(this.state)
+    }
+
+    handleSubmit = async (e) => {
+        const token = await authCookie(document.cookie).then(t => t);
+        const artistId = await artistIdCookie(document.cookie).then(a => a);
 
         let data = {
             songName: this.state.formValue.songName,
@@ -64,6 +79,7 @@ class CreateCampaign extends Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                // 'Authorization': this.state.token
                 'Authorization': `Bearer ${token.split('=')[1]}`
             },
             body: JSON.stringify(data)
@@ -123,7 +139,7 @@ class CreateCampaign extends Component {
                                     </FormGroup>
                                     <FormGroup>
                                         <ControlLabel>Release Date</ControlLabel>
-                                            <FormControl name="releaseDate" accepter={DatePicker} placeholder='Select Release Date' oneTap/>
+                                            <FormControl accepter={DatePicker} name="releaseDate"  placeholder='Select Release Date'/>
                                     </FormGroup>        
                                     <FormGroup>
                                         <ButtonToolbar className="right">

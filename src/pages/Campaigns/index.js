@@ -24,12 +24,12 @@ class Campaigns extends Component {
         // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    componentDidMount = (e) => {
+    componentDidMount = async (e) => {
         // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
             // that means that we are authenticated, now check to see if there are artists...
         
         // issue is I need to select the right cookie to split and send in authorization
-        const token = authCookie(document.cookie);
+        const token = await authCookie(document.cookie).then(t => t);
         fetch(`${process.env.REACT_APP_API}/api/get-campaigns`, {
             method: 'GET',
             headers: {
@@ -40,7 +40,6 @@ class Campaigns extends Component {
                 return campaigns.json()
             })
             .then(campaigns => {
-                console.log(campaigns.campaigns)
                 if (campaigns.campaigns.length < 1) {
                     return this.setState({
                         ...this.state.numOfArtists,
@@ -87,12 +86,14 @@ class Campaigns extends Component {
             {
                 btnValue: 'View All Campaigns',
                 btnLink: 'https://facebook.com/',
-                btnClassPrefix: 'rs-blue-btn' 
+                btnClassPrefix: 'rs-blue-btn',
+                btnId: 1
             },
             {
                 btnValue: 'Create New Campaign',
                 btnLink: 'https://instagram.com/',
-                btnClassPrefix: 'rs-green-btn' 
+                btnClassPrefix: 'rs-green-btn',
+                btnId: 2
             }
         ]
         
@@ -104,7 +105,7 @@ class Campaigns extends Component {
                         <PageNav pageName="Campaigns" btns={btnArray} />
                         <FlexboxGrid className="CampaignCard" justify="start">
                             {this.state.campaigns.map(campaign => {
-                                return <CampaignCard campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
+                                return <CampaignCard key={campaign._id} campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
                             })}
                         </FlexboxGrid>        
                 </Content>
