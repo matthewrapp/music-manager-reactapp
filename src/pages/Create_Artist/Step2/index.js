@@ -1,5 +1,5 @@
 import '../index.css';
-import {FormGroup, ControlLabel, FormControl, ButtonToolbar, Button, Uploader} from 'rsuite';
+import {FormGroup, ControlLabel, FormControl, ButtonToolbar, Button} from 'rsuite';
 import { Component } from 'react';
 
 class Step2 extends Component {

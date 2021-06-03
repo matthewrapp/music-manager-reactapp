@@ -116,7 +116,6 @@ class CreateCampaign extends Component {
                                     ref={(ref) => { this.form = ref; }}
                                     onChange={formValue => { this.setState({ formValue }) }}
                                     formValue={this.state.formValue} onCheck={formError => { this.setState({ formError: formError, hasValidationError: (Object.keys(formError).length === 0 ? false : true) }) }}
-                                    formValue={this.props.formValue}
                                     fluid>
                                     <FormGroup>
                                         <ControlLabel>Song Name</ControlLabel>

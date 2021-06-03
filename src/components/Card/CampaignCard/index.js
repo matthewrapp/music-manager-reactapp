@@ -1,5 +1,5 @@
 import './index.css';
-import { Content, Panel, FlexboxGrid, Paragraph } from 'rsuite';
+import { Panel, FlexboxGrid } from 'rsuite';
 import { Component } from 'react';
 
 class CampaignCard extends Component {
