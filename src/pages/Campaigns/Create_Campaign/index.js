@@ -1,7 +1,7 @@
 import './index.css';
 import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, Schema, Button, FlexboxGrid, Container, DatePicker} from 'rsuite';
 import { Component } from 'react';
-import AppHeader from '../../../components/Header/Auth_Header'
+import AppHeader from '../../../components/Header/AuthHeader'
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../../images/img-1.jpg';
@@ -27,21 +27,6 @@ class CreateCampaign extends Component {
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
         // this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    async componentDidMount() {
-        // const token = await authCookie(document.cookie).then(t => t);
-        // const artistId = await artistIdCookie(document.cookie).then(a => a);
-        // this.setState({
-        //     ...this.state.formValue,
-        //     ...this.state.formError,
-        //     ...this.state.hasValidationError,
-        //     ...this.state.success,
-        //     token: `Bearer ${token.split('=')[1]}`,
-        //     artistId: artistId.split('=')[1]
-        // })
-
-        // console.log(this.state)
     }
 
     handleSubmit = async (e) => {
@@ -143,7 +128,7 @@ class CreateCampaign extends Component {
                                     </FormGroup>        
                                     <FormGroup>
                                         <ButtonToolbar className="right">
-                                            <Button classPrefix="rs-orange-btn"
+                                            <Button classPrefix="rs-orange-btn-lg"
                                                     onClick={this.handleSubmit}
                                                     type="submit"
                                                     disabled={this.state.hasValidationError}>Create Campaign</Button>

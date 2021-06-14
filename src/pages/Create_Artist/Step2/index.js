@@ -25,8 +25,8 @@ class Step2 extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ButtonToolbar className="right">
-                        <Button classPrefix="rs-orange-btn" onClick={this.props.onClick} type="submit" name="prev">Previous</Button>
-                        <Button classPrefix="rs-orange-btn" onClick={this.props.onClick} type="submit" name="submit" disabled={this.props.error}>Finish</Button>
+                        <Button classPrefix="rs-orange-btn-lg" onClick={this.props.onClick} type="submit" name="prev">Previous</Button>
+                        <Button classPrefix="rs-orange-btn-lg" onClick={this.props.onClick} type="submit" name="submit" disabled={this.props.error}>Finish</Button>
                     </ButtonToolbar>
                 </FormGroup>
                                 

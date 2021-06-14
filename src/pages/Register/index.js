@@ -1,7 +1,7 @@
 import './index.css';
 import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import { Component } from 'react';
-import AppHeader from '../../components/Header/NotAuth_Header'
+import AppHeader from '../../components/Header/NotAuthHeader'
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';
@@ -117,7 +117,7 @@ class Register extends Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <ButtonToolbar className="right">
-                                        <Button classPrefix="rs-orange-btn" onClick={this.handleSubmit} type="submit">Register</Button>
+                                        <Button classPrefix="rs-orange-btn-lg" onClick={this.handleSubmit} type="submit">Register</Button>
                                     </ButtonToolbar>
                                 </FormGroup>
                             </Form>

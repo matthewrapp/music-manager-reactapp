@@ -1,7 +1,7 @@
 import './index.css';
 import { Col, Content, Panel, Form, FormGroup, ControlLabel, FormControl, ButtonToolbar, ButtonGroup, Button, FlexboxGrid, Container} from 'rsuite';
 import React, { Component } from 'react';
-import AppHeader from '../../components/Header/NotAuth_Header';
+import AppHeader from '../../components/Header/NotAuthHeader';
 // import AppFooter from '../../components/Footer';
 
 import backgroundImg from '../../images/img-1.jpg';
@@ -95,7 +95,7 @@ class Login extends Component {
                         <FlexboxGrid.Item className="col-item background-img" as={Col} colspan={24} md={12} order={2} style={{backgroundImage: `url(${backgroundImg})`}}>
                             {/* Background Image Goes Here */}
                         </FlexboxGrid.Item>
-                            <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
+                        <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
                             <Panel header={<h3>Login</h3>}>
                             <Form ref={(ref) => {
                                     this.form = ref;
@@ -110,7 +110,7 @@ class Login extends Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <ButtonToolbar className="right">
-                                        <Button classPrefix="rs-orange-btn" onClick={this.handleSubmit} type="submit">Sign in</Button>
+                                        <Button classPrefix="rs-orange-btn-lg" onClick={this.handleSubmit} type="submit">Sign in</Button>
                                     </ButtonToolbar>
                                 </FormGroup>
                             </Form>

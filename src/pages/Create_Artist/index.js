@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 
 import { authCookie } from '../../helper';
 
+import AppHeader from '../../components/Header/AuthHeader'
 // import AppFooter from '../../components/Footer';
 import Step1 from './Step1';
 import Step2 from './Step2';
@@ -58,7 +59,7 @@ class CreateArtist extends Component {
     //     if (artistName.maxLength === 0)
     // }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         // e.preventDefault();
         if (e.target.name === 'next') {
             return this._next()
@@ -90,8 +91,7 @@ class CreateArtist extends Component {
             ...this.state.currentStep,
         });
 
-        const token = authCookie(document.cookie);
-
+        const token = await authCookie(document.cookie).then(t => t);
         fetch(`${process.env.REACT_APP_API}/api/create-artist`, {
             method: 'POST',
             headers: {
@@ -143,6 +143,7 @@ class CreateArtist extends Component {
         return (
             <div className="CreateArtist show-fake-browser login-page">
                 <Container>
+                        <AppHeader />
                         <Content> 
                             <FlexboxGrid className="col-container" justify="center" align="middle">
                                 <FlexboxGrid.Item className="col-item background-img" as={Col} colspan={24} md={12} order={2} style={{backgroundImage: `url(${backgroundImg})`}}>
@@ -150,7 +151,11 @@ class CreateArtist extends Component {
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
                                 <Panel header={<h3>Create Artist, Step {this.state.currentStep}</h3>}>
-                                    <Form model={model} onChange={formValue => { this.setState({ formValue }) }} onCheck={formError => {this.setState({formError: formError, hasValidationError: (Object.keys(formError).length === 0 ? false : true)})}} formValue={this.props.formValue} fluid>
+                                    <Form model={model}
+                                        onChange={formValue => { this.setState({ formValue }) }}
+                                        onCheck={formError => { console.log(Object.keys(formError)); this.setState({ formError: formError, hasValidationError: (Object.keys(formError).length === 0 ? false : true) }) }}
+                                        formValue={this.props.formValue}
+                                        fluid>
                                         <Step1 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} artistName={this.state.formValue.artistName} artistBio={this.state.formValue.artistBio} />
                                         <Step2 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} facebook={this.state.formValue.facebook} instagram={this.state.formValue.instagram} soundcloud={this.state.formValue.soundcloud} />
                                     </Form>

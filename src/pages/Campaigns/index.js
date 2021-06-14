@@ -2,7 +2,7 @@ import './index.css';
 import { Row, Col, Content, Panel, Button, FlexboxGrid, Container } from 'rsuite';
 import FlexboxGridItem from 'rsuite/es/FlexboxGrid/FlexboxGridItem';
 import { Component } from 'react';
-import AppHeader from '../../components/Header/Auth_Header'
+import AppHeader from '../../components/Header/AuthHeader'
 // import AppFooter from '../../components/Footer';
 import CampaignCard from '../../components/Card/CampaignCard';
 import PageNav from '../../components/PageNav';
@@ -17,7 +17,10 @@ class Campaigns extends Component {
         super(props);
         this.state = {
             numOfCampaigns: 0,
-            campaigns: []
+            campaigns: [],
+            profileInfo: {
+                name: null
+            }
         }
         // HandleSubmit relies on this.state
         // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
@@ -85,14 +88,16 @@ class Campaigns extends Component {
         const btnArray = [
             {
                 btnValue: 'View All Campaigns',
+                btnMobileValue: 'View',
                 btnLink: 'https://facebook.com/',
-                btnClassPrefix: 'rs-blue-btn',
+                btnClassPrefix: 'rs-blue-btn-sm',
                 btnId: 1
             },
             {
                 btnValue: 'Create New Campaign',
+                btnMobileValue: 'Create',
                 btnLink: 'https://instagram.com/',
-                btnClassPrefix: 'rs-green-btn',
+                btnClassPrefix: 'rs-green-btn-sm',
                 btnId: 2
             }
         ]

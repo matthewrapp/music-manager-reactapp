@@ -21,7 +21,7 @@ class Step1 extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ButtonToolbar className="right">
-                        <Button classPrefix="rs-orange-btn" onClick={this.props.onClick} type="submit" name="next" disabled={this.props.error}>Next</Button>
+                        <Button classPrefix="rs-orange-btn-lg" onClick={this.props.onClick} type="submit" name="next" disabled={this.props.error}>Next</Button>
                     </ButtonToolbar>
                 </FormGroup>
             </div>

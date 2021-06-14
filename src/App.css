@@ -4,7 +4,8 @@
   padding: 20px;
 }
 
-.bg-dark-black {
+.bg-dark-black,
+.rs-dropdown-menu {
   background-color: rgb(26, 23, 23) !important;
 }
 
@@ -12,7 +13,11 @@
   border-radius: none !important;
 }
 
-.rs-orange-btn {
+.rs-nav-item-active {
+  color: rgb(255, 125, 38) !important;
+}
+
+.rs-orange-btn-sm {
   background-color: rgba(255, 125, 38, 0.3);
   border: 1px solid rgb(255, 125, 38);
   padding: 10px 40px;
@@ -22,7 +27,7 @@
   display: inline-block;
 }
 
-.rs-blue-btn {
+.rs-blue-btn-sm {
   background-color: rgba(57, 153, 255, 0.3);
   border: 1px solid rgb(57, 153, 255);
   padding: 10px 40px;
@@ -32,7 +37,37 @@
   display: inline-block;
 }
 
-.rs-green-btn {
+.rs-green-btn-lg {
+  background-color: rgba(44, 209, 58, 0.3);
+  border: 1px solid rgb(44, 209, 58);
+  padding: 20px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.rs-orange-btn-lg {
+  background-color: rgba(255, 125, 38, 0.3);
+  border: 1px solid rgb(255, 125, 38);
+  padding: 20px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.rs-blue-btn-lg {
+  background-color: rgba(57, 153, 255, 0.3);
+  border: 1px solid rgb(57, 153, 255);
+  padding: 20px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.rs-green-btn-sm {
   background-color: rgba(44, 209, 58, 0.3);
   border: 1px solid rgb(44, 209, 58);
   padding: 10px 40px;

@@ -33,3 +33,21 @@
   text-transform: uppercase;
   font-size: 18px;
 }
+
+.PageNav .mobile {
+  display: none;
+}
+
+.PageNav .mobile .rs-navbar-header {
+  text-align: left;
+}
+
+@media only screen and (max-width: 578px) {
+  .PageNav .desktop {
+    display: none;
+  }
+
+  .PageNav .mobile {
+    display: block;
+  }
+}

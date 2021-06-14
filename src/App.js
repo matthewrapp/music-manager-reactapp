@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import CreateArtist from './pages/Create_Artist';
 import Campaigns from './pages/Campaigns';
 import CreateCampaign from './pages/Campaigns/Create_Campaign';
+import Profile from './pages/Profile';
 import Error from './pages/Error';
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path='/admin/create-artist' component={auth(CreateArtist)} />
           <Route path='/admin/campaigns' component={auth(Campaigns)} />
           <Route path='/admin/create-campaign' component={auth(CreateCampaign)} />
+          <Route path='/admin/profile' component={auth(Profile)} />
           <Route component={Error} />
         </Switch>
       </div>

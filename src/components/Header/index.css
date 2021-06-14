@@ -1,3 +1,7 @@
+.Header .mobile {
+  display: none;
+}
+
 .Header .navbar-brand {
   position: relative;
   top: 22%;
@@ -19,4 +23,25 @@
 .Header .rs-navbar-header a,
 .Header .rs-navbar-body a {
   color: #fff !important;
+}
+
+.Header .dropdown-menu ul {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  text-align: center;
+}
+
+.Header a:hover {
+  color: rgb(26, 23, 23) !important;
+}
+
+@media only screen and (max-width: 578px) {
+  .Header .desktop {
+    display: none;
+  }
+
+  .Header .mobile {
+    display: block;
+  }
 }

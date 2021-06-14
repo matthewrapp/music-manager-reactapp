@@ -5,6 +5,7 @@
 
 .CampaignCard .card-col {
   min-width: 280px;
+  max-width: 280px;
 }
 
 .CampaignCard .campaign-img-thumbnail {

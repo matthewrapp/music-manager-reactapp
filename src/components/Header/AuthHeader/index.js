@@ -1,0 +1,113 @@
+import { Header, Navbar, Nav, Icon, Dropdown } from 'rsuite';
+import { Component } from 'react';
+import { artistIdCookie, authCookie, eraseCookie } from '../../../helper';
+import { Redirect } from 'react-router';
+
+import '../index.css';
+
+class AuthHeader extends Component {
+  constructor(props) {
+        super(props);
+        this.state = {
+          profileName: null,
+          profileImg: null,
+          isAuth: true
+        }
+  }
+
+  logout = async (e) => {
+    let token = await authCookie(document.cookie).then(t => t);
+    let artistId = await artistIdCookie(document.cookie).then(a => a);
+    await eraseCookie(token);
+    await eraseCookie(artistId);
+
+    this.setState({
+      ...this.state.profileName,
+      ...this.state.profileImg,
+      isAuth: false
+    })
+  }
+  
+  openMobileMenu = (e) => {
+    let element = e.target.nextSibling;
+    console.log(element)
+    if (!element.classList.contains('hide')) {
+      element.classList.add('hide');
+    } else {
+      element.classList.remove('hide');
+    }
+  }
+
+  componentDidMount = async () => {
+    const token = await authCookie(document.cookie).then(t => t);
+        fetch(`${process.env.REACT_APP_API}/api/user-profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token.split('=')[1]}`
+            }
+        })
+            .then(user => {
+                return user.json()
+            })
+          .then(user => {
+                return this.setState({
+                  profileName: user.firstName,
+                  profileImg: user.imageUrl + '-/smart_resize/40x40/',
+                  ...this.state.isAuth
+                })
+            })
+  }
+
+  render() {
+    if (!this.state.isAuth) {
+      return ( <Redirect to='/' /> )
+    }
+  
+    return (
+      <Header className="Header">
+        <Navbar className="bg-dark-black desktop">
+          <Navbar.Header>
+            <a href="/" className="navbar-brand logo">Music Manager</a>
+          </Navbar.Header>
+          <Navbar.Body>
+            {/* <Nav>
+              <Nav.Item href="/tosdklj" icon={<HomeOutlined />} > Home</Nav.Item>
+            </Nav> */}
+            <Nav justified pullRight>
+              <Dropdown trigger={['click', 'hover']} icon={<img style={{ borderRadius: '50%', marginTop: '-8px' }} alt={this.state.profileName + this.state.profileImg} src={this.state.profileImg} />}>
+                <Dropdown.Item href="/admin/profile">Profile</Dropdown.Item>
+                <Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
+              </Dropdown>
+            </Nav>
+            <Nav pullRight>
+              <Nav.Item href="/admin/campaigns" > Campaigns</Nav.Item>
+              <Nav.Item href="/profile" > Manage</Nav.Item>
+              <Nav.Item href="/profile" > Create</Nav.Item>
+            </Nav>
+          </Navbar.Body>
+        </Navbar>
+        <Navbar className="bg-dark-black mobile">
+          <Navbar.Header>
+            <a href="/" className="navbar-brand logo">Music Manager</a>
+          </Navbar.Header>
+          <Navbar.Body>
+              <Nav justified pullRight>
+                <Dropdown trigger={['click', 'hover']} icon={<img style={{ borderRadius: '50%', marginTop: '-8px' }} alt={this.state.profileName + this.state.profileImg} src={this.state.profileImg} />}>
+                  <Dropdown.Item href="/admin/profile">Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
+                </Dropdown>
+              </Nav>   
+              <Icon style={{marginTop: '14px', marginRight: '10px', color: '#fff', float: 'right'}} icon='bars' size='2x' onClick={this.openMobileMenu}></Icon>
+                <Nav className='dropdown-menu hide' style={{width: '100%'}}>
+                  <Nav.Item href="/admin/campaigns" > Campaigns</Nav.Item>
+                  <Nav.Item href="/profile" > Manage</Nav.Item>
+                  <Nav.Item href="/profile" > Create</Nav.Item>
+                </Nav>
+          </Navbar.Body>
+        </Navbar>
+      </Header>
+    );
+  }
+}
+
+export default AuthHeader

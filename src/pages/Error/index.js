@@ -1,7 +1,7 @@
 import './index.css';
 import { Content, FlexboxGrid, Container } from 'rsuite';
 import { Component } from 'react';
-import AppHeader from '../../components/Header/NotAuth_Header'
+import AppHeader from '../../components/Header/NotAuthHeader'
 import AppFooter from '../../components/Footer';
 
 class Error extends Component {

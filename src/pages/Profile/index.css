@@ -1,0 +1,35 @@
+.Profile .background-img {
+  background-position: 20% 0%;
+  background-size: cover;
+}
+
+.Profile .col-item {
+  height: 800px;
+  padding: 40px 60px;
+}
+
+.Profile .rs-panel {
+  background: transparent !important;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.Profile .rs-panel-title {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.Profile .rs-form-control-label {
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 12px;
+  padding-bottom: 5px;
+}
+
+.Profile .rs-input {
+  border-radius: 0px !important;
+  background: transparent !important;
+  border: 1px solid rgb(92, 92, 92) !important;
+}

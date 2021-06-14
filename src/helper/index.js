@@ -1,3 +1,5 @@
+import { Redirect } from "react-router-dom";
+
 export const authCookie = async (docCookies) => {
     let authenticationCookie;
     await docCookies.split('; ').forEach(cookie => {
@@ -22,4 +24,10 @@ export const artistIdCookie = async (docCookies) => {
     })
 
     return artistIdCookie
+}
+
+export const eraseCookie = async (cookie) => {
+    let cookieName = cookie.split('=')[0];
+    document.cookie = `${cookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+    return
 }
