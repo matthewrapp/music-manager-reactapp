@@ -1,5 +1,3 @@
-import { Redirect } from "react-router-dom";
-
 export const authCookie = async (docCookies) => {
     let authenticationCookie;
     await docCookies.split('; ').forEach(cookie => {
