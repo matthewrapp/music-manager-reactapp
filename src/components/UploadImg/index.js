@@ -47,7 +47,7 @@ class UploadImg extends Component {
                     <Content> 
                         <FlexboxGrid justify="center" align="middle">
                             <FlexboxGrid.Item>
-                                <Widget publicKey='11e5178d3b54ebf53b1b' onChange={this.onUploadImg} clearable tabs='file' />
+                                <Widget publicKey={process.env.IMAGE_UPLOADER_PUBLIC_KEY} onChange={this.onUploadImg} clearable tabs='file' />
                             </FlexboxGrid.Item>
                         </FlexboxGrid>
                     </Content>
