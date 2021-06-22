@@ -1,0 +1,25 @@
+.BtnCard .rs-panel {
+  background: rgb(48, 48, 48);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.BtnCard .rs-panel-body {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.BtnCard .left-col {
+  text-align: center;
+  width: 16%;
+}
+.BtnCard .right-col {
+  width: 84%;
+}
+
+.BtnCard .left-col i {
+  font-size: 32px;
+}

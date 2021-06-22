@@ -4,6 +4,13 @@ import { Component } from 'react';
 import './index.css';
 
 class PageNav extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isBtn: false
+    }
+  }
   
   openMobileMenu = (e) => {
     let element = e.target.nextSibling;
@@ -15,6 +22,14 @@ class PageNav extends Component {
   }
 
   render() {
+    let pageNavigation;
+    if (this.props.btns !== undefined) {
+      this.props.btns.map(btn => {
+        pageNavigation = <Nav.Item key={btn.btnId} href={btn.btnLink} classPrefix={btn.btnClassPrefix} >{btn.btnValue}</Nav.Item>
+        return pageNavigation
+      })
+    }
+
     return (
       <Container className="PageNav">
         <Navbar className="bg-dark-black desktop">
@@ -23,9 +38,7 @@ class PageNav extends Component {
           </Navbar.Header>
           <Navbar.Body>
             <Nav pullRight>
-              {this.props.btns.map(btn => {
-                return <Nav.Item key={btn.btnId} href={btn.btnLink} classPrefix={btn.btnClassPrefix} >{btn.btnValue}</Nav.Item>
-              })}
+              {pageNavigation}
             </Nav>
           </Navbar.Body>
         </Navbar>
@@ -36,9 +49,7 @@ class PageNav extends Component {
           <Navbar.Body>
             <IconButton icon={<Icon icon='chevron-circle-down'></Icon>} classPrefix='rs-green-btn-sm' placement='right' style={{float: 'right', marginTop: '6px'}}> Actions</IconButton>
             <Nav pullRight className='action-btns hide'>
-              {this.props.btns.map(btn => {
-                return <Nav.Item key={btn.btnId} href={btn.btnLink} classPrefix={btn.btnClassPrefix} >{btn.btnMobileValue}</Nav.Item>
-              })}
+              {pageNavigation}
             </Nav>
           </Navbar.Body>
         </Navbar>

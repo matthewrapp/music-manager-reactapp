@@ -1,3 +1,18 @@
+a:hover {
+  text-decoration: none !important;
+}
+
+.rs-content {
+  width: 1060px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1070px) {
+  .rs-content {
+    width: 100%;
+  }
+}
+
 .rs-testing {
   background: rgba(13, 255, 13, 0.3);
   border-color: rgba(13, 255, 13, 1);
@@ -20,6 +35,16 @@
 .rs-orange-btn-sm {
   background-color: rgba(255, 125, 38, 0.3);
   border: 1px solid rgb(255, 125, 38);
+  padding: 10px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 10px;
+  display: inline-block;
+}
+
+.rs-red-btn-sm {
+  background-color: rgba(255, 75, 65, 0.3);
+  border: 1px solid rgb(255, 75, 65);
   padding: 10px 40px;
   color: white;
   text-transform: uppercase;
@@ -50,6 +75,16 @@
 .rs-orange-btn-lg {
   background-color: rgba(255, 125, 38, 0.3);
   border: 1px solid rgb(255, 125, 38);
+  padding: 20px 40px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.rs-red-btn-lg {
+  background-color: rgba(255, 75, 65, 0.3);
+  border: 1px solid rgb(255, 75, 65);
   padding: 20px 40px;
   color: white;
   text-transform: uppercase;

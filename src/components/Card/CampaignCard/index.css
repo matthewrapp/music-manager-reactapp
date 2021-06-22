@@ -3,14 +3,37 @@
   padding-right: 22px;
 }
 
-.CampaignCard .card-col {
-  min-width: 280px;
-  max-width: 280px;
+.CampaignCard .rs-panel {
+  height: 120px;
+  border-radius: 0;
 }
 
+.CampaignCard .panel-col {
+  background-color: rgb(48, 48, 48);
+  height: 120px;
+  padding: 0;
+}
+
+.CampaignCard .panel-col-text {
+  padding: 0 20px;
+}
+
+/* .CampaignCard .card-col {
+  min-width: 280px;
+  max-width: 280px;
+} */
+
 .CampaignCard .campaign-img-thumbnail {
-  height: 240px;
-  background: rgba(255, 255, 255, 0.7);
+  height: 120px;
+  /* background-position: center;
+  background-size: cover; */
+}
+
+.CampaignCard .rs-panel-name {
+  margin-top: 12px;
+  margin-left: 20px;
+  font-size: 26px !important;
+  text-transform: uppercase;
 }
 
 .CampaignCard .rs-panel-heading {
@@ -19,6 +42,8 @@
   color: rgb(255, 169, 78) !important;
   padding: 0 !important;
   margin-bottom: 6px;
+  margin-top: 28px;
+  margin-left: 20px;
 }
 
 .CampaignCard .rs-panel-body {

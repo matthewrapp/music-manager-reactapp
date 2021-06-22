@@ -1,18 +1,21 @@
-import { Header, Navbar, Nav, Icon, Dropdown } from 'rsuite';
+import { Header, Navbar, Nav, Icon, Dropdown, Modal } from 'rsuite';
 import { Component } from 'react';
 import { artistIdCookie, authCookie, eraseCookie } from '../../../helper';
 import { Redirect } from 'react-router';
+import BtnCard from '../../Card/BtnCard';
 
 import '../index.css';
 
 class AuthHeader extends Component {
   constructor(props) {
-        super(props);
-        this.state = {
-          profileName: null,
-          profileImg: null,
-          isAuth: true
-        }
+    super(props);
+    this.state = {
+      profileName: null,
+      profileImg: null,
+      isAuth: true,
+      createModalOpen: false,
+      mobileMenuOpen: false
+    };
   }
 
   logout = async (e) => {
@@ -24,17 +27,52 @@ class AuthHeader extends Component {
     this.setState({
       ...this.state.profileName,
       ...this.state.profileImg,
-      isAuth: false
+      isAuth: false,
+      ...this.state.createModalOpen,
+      ...this.state.mobileMenuOpen
     })
+  }
+
+  createModalAction = (e) => {
+    if (e.target.parentElement.classList.contains('open-modal-target')) {
+        this.setState({
+        ...this.state.profileName,
+        ...this.state.profileImg,
+        ...this.state.isAuth,
+        createModalOpen: true,
+        mobileMenuOpen: false
+      })
+    }
+
+    if (e.target.classList.contains('rs-modal-header-close')) {
+      this.setState({
+        ...this.state.profileName,
+        ...this.state.profileImg,
+        ...this.state.isAuth,
+        createModalOpen: false,
+        mobileMenuOpen: false
+      })
+    }
   }
   
   openMobileMenu = (e) => {
     let element = e.target.nextSibling;
-    console.log(element)
     if (!element.classList.contains('hide')) {
-      element.classList.add('hide');
+        this.setState({
+        ...this.state.profileName,
+        ...this.state.profileImg,
+        ...this.state.isAuth,
+        ...this.state.createModalOpen,
+        mobileMenuOpen: false
+      })
     } else {
-      element.classList.remove('hide');
+        this.setState({
+        ...this.state.profileName,
+        ...this.state.profileImg,
+        ...this.state.isAuth,
+        ...this.state.createModalOpen,
+        mobileMenuOpen: true
+      })
     }
   }
 
@@ -53,12 +91,29 @@ class AuthHeader extends Component {
                 return this.setState({
                   profileName: user.firstName,
                   profileImg: user.imageUrl + '-/smart_resize/40x40/',
-                  ...this.state.isAuth
+                  ...this.state.isAuth,
+                  ...this.state.createModalOpen,
+                  ...this.state.mobileMenuOpen
                 })
             })
   }
 
   render() {
+    const btnCardInfo = [
+      {
+        optionUrl: '/admin/create-artist',
+        optionTitle: 'Create Artist',
+        optionDesc: 'Create an artist! afasdfsadfadsf fadsf asdfa sfadsfadsfadsfadsfasdf fdsafadsf fdasfadsfdsafadsf fdasdfsda',
+        optionIcon: 'music'
+      },
+      {
+        optionUrl: '/admin/create-campaign',
+        optionTitle: 'Create Campaign',
+        optionDesc: 'Create a campaign, representing a song, to help you stay on top of your release precedures!',
+        optionIcon: 'area-chart'
+      }
+    ]
+
     if (!this.state.isAuth) {
       return ( <Redirect to='/' /> )
     }
@@ -70,19 +125,17 @@ class AuthHeader extends Component {
             <a href="/" className="navbar-brand logo">Music Manager</a>
           </Navbar.Header>
           <Navbar.Body>
-            {/* <Nav>
-              <Nav.Item href="/tosdklj" icon={<HomeOutlined />} > Home</Nav.Item>
-            </Nav> */}
             <Nav justified pullRight>
-              <Dropdown trigger={['click', 'hover']} icon={<img style={{ borderRadius: '50%', marginTop: '-8px' }} alt={this.state.profileName + this.state.profileImg} src={this.state.profileImg} />}>
-                <Dropdown.Item href="/admin/profile">Profile</Dropdown.Item>
+              <Dropdown placement='bottomEnd' trigger={['click', 'hover']} icon={<img style={{ borderRadius: '50%', marginTop: '-8px' }} alt={this.state.profileName + this.state.profileImg} src={this.state.profileImg} />}>
+                <Dropdown.Item href="/admin/profile">Account Profile</Dropdown.Item>
+                <Dropdown.Item href="/admin/artists">Artists</Dropdown.Item>
                 <Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
               </Dropdown>
             </Nav>
             <Nav pullRight>
-              <Nav.Item href="/admin/campaigns" > Campaigns</Nav.Item>
-              <Nav.Item href="/profile" > Manage</Nav.Item>
-              <Nav.Item href="/profile" > Create</Nav.Item>
+              <Nav.Item href="/admin/campaigns" >Campaigns</Nav.Item>
+              <Nav.Item href="/profile" >Manage</Nav.Item>
+              <Nav.Item className='open-modal-target' onClick={this.createModalAction} >Create</Nav.Item>
             </Nav>
           </Navbar.Body>
         </Navbar>
@@ -98,13 +151,23 @@ class AuthHeader extends Component {
                 </Dropdown>
               </Nav>   
               <Icon style={{marginTop: '14px', marginRight: '10px', color: '#fff', float: 'right'}} icon='bars' size='2x' onClick={this.openMobileMenu}></Icon>
-                <Nav className='dropdown-menu hide' style={{width: '100%'}}>
-                  <Nav.Item href="/admin/campaigns" > Campaigns</Nav.Item>
-                  <Nav.Item href="/profile" > Manage</Nav.Item>
-                  <Nav.Item href="/profile" > Create</Nav.Item>
+                <Nav className={`dropdown-menu ${this.state.mobileMenuOpen ? '' : 'hide'}`} style={{width: '100%'}}>
+                  <Nav.Item href="/admin/campaigns" >Campaigns</Nav.Item>
+                  <Nav.Item href="/profile" >Manage</Nav.Item>
+                  <Nav.Item className='open-modal-target' onClick={this.createModalAction} >Create</Nav.Item>
                 </Nav>
           </Navbar.Body>
         </Navbar>
+        <div className='modal-container desktop-modal'>
+          <Modal show={this.state.createModalOpen} onHide={this.createModalAction} size='sm' autoFocus >
+            <Modal.Header>
+              
+            </Modal.Header>
+            <Modal.Body>
+              <BtnCard info={btnCardInfo} />
+            </Modal.Body>
+          </Modal>
+        </div>
       </Header>
     );
   }

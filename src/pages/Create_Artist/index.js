@@ -125,7 +125,7 @@ class CreateArtist extends Component {
         if (this.state.currentStep > 2) {
             return (
                 <Redirect to={{
-                    pathname: '/admin/campaigns',
+                    pathname: '/admin/upload-artist-image',
                 }} />
             )
         }

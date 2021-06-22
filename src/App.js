@@ -10,7 +10,9 @@ import CreateArtist from './pages/Create_Artist';
 import Campaigns from './pages/Campaigns';
 import CreateCampaign from './pages/Campaigns/Create_Campaign';
 import Profile from './pages/Profile';
+import Artists from './pages/Artists';
 import Error from './pages/Error';
+import UploadArtistImg from './pages/UploadArtistImg';
 
 class App extends Component {
   constructor(props) {
@@ -27,9 +29,11 @@ class App extends Component {
           <Route path='/' component={Login} exact />
           <Route path='/register' component={Register} />
           <Route path='/admin/create-artist' component={auth(CreateArtist)} />
+          <Route path='/admin/upload-artist-image' component={auth(UploadArtistImg)} />
           <Route path='/admin/campaigns' component={auth(Campaigns)} />
           <Route path='/admin/create-campaign' component={auth(CreateCampaign)} />
           <Route path='/admin/profile' component={auth(Profile)} />
+          <Route path='/admin/artists' component={auth(Artists)} />
           <Route component={Error} />
         </Switch>
       </div>

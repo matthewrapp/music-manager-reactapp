@@ -3,28 +3,21 @@ import { Row, Col, Content, Panel, Button, FlexboxGrid, Container } from 'rsuite
 import FlexboxGridItem from 'rsuite/es/FlexboxGrid/FlexboxGridItem';
 import { Component } from 'react';
 import AppHeader from '../../components/Header/AuthHeader'
-// import AppFooter from '../../components/Footer';
-import CampaignCard from '../../components/Card/CampaignCard';
 import PageNav from '../../components/PageNav';
 
 import { authCookie } from '../../helper';
+import ArtistCard from '../../components/Card/ArtistCard';
 
 /*
 This class displays all the campaigns/songs related to the user/artists
 */
-class Campaigns extends Component {
+class Artists extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numOfCampaigns: 0,
-            campaigns: [],
-            profileInfo: {
-                name: null
-            }
+            numOfArtists: 0,
+            artists: []
         }
-        // HandleSubmit relies on this.state
-        // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
-        // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount = async (e) => {
@@ -33,25 +26,25 @@ class Campaigns extends Component {
         
         // issue is I need to select the right cookie to split and send in authorization
         const token = await authCookie(document.cookie).then(t => t);
-        fetch(`${process.env.REACT_APP_API}/api/get-campaigns`, {
+        fetch(`${process.env.REACT_APP_API}/api/artists`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token.split('=')[1]}`
             }
         })
-            .then(campaigns => {
-                return campaigns.json()
+            .then(artists => {
+                return artists.json()
             })
-            .then(campaigns => {
-                if (campaigns.campaigns.length < 1) {
+            .then(artists => {
+                if (artists.artists.length < 1) {
                     return this.setState({
                         ...this.state.numOfArtists,
                         ...this.state.artists
                     })
                 }
                 return this.setState({
-                    numOfCampaigns: campaigns.campaigns.length,
-                    campaigns: campaigns.campaigns
+                    numOfArtists: artists.artists.length,
+                    artists: artists.artists
                 })
             })
     }
@@ -87,30 +80,23 @@ class Campaigns extends Component {
 
         const btnArray = [
             {
-                btnValue: 'View All Campaigns',
-                btnMobileValue: 'View',
-                btnLink: 'https://facebook.com/',
-                btnClassPrefix: 'rs-blue-btn-sm',
-                btnId: 1
-            },
-            {
-                btnValue: 'Create New Campaign',
+                btnValue: 'Create New Artist',
                 btnMobileValue: 'Create',
-                btnLink: 'https://instagram.com/',
+                btnLink: 'https://facebook.com/',
                 btnClassPrefix: 'rs-green-btn-sm',
-                btnId: 2
+                btnId: 1
             }
         ]
-        
+
         return (
-            <div className="Campaigns">
+            <div className="Artists">
             <Container>
                 <AppHeader />
                     <Content>
-                        <PageNav pageName="Campaigns" btns={btnArray} />
-                        <FlexboxGrid className="CampaignCard" justify="space-between">
-                            {this.state.campaigns.map(campaign => {
-                                return <CampaignCard key={campaign._id} campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
+                        <PageNav pageName="Artists" btns={btnArray} />
+                        <FlexboxGrid className="ArtistCard" justify="space-between">
+                            {this.state.artists.map(artist => {
+                                return <ArtistCard key={artist._id} artistId={artist._id} date={artist.date.split('T')[0]} artist={artist.artistName} artistImg={artist.imageUrl + '100x100'} artistImgAltTag={artist.artistName} primary={artist.primary}/>
                             })}
                         </FlexboxGrid>        
                 </Content>
@@ -121,4 +107,4 @@ class Campaigns extends Component {
   }
 }
 
-export default Campaigns;
+export default Artists;

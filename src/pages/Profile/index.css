@@ -8,6 +8,10 @@
   padding: 40px 60px;
 }
 
+.Profile .rs-form-group {
+  margin-bottom: 10px;
+}
+
 .Profile .rs-panel {
   background: transparent !important;
   max-width: 660px;

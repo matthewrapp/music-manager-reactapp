@@ -1,26 +1,26 @@
 import './index.css';
-import { Panel, FlexboxGrid } from 'rsuite';
+import { Panel, FlexboxGrid, Col } from 'rsuite';
 import { Component } from 'react';
 
 class CampaignCard extends Component {
     
     render() {
         return (
-        
-              <FlexboxGrid.Item colspan={6} className="card-col" >
-                  <a href={'/campaign/' + this.props.campaignId}>
-                  {/* <a href={router.base_url + '/campaign/' + this.props.campaignId}> */}
-                    {/* <Panel header={this.props.status + ' | ' + this.props.date} shaded>
-                      <h2>{this.props.campaignTitle}</h2>
-                      <img className='campaign-img-thumbnail' src={this.props.campaignImg} alt={this.props.campaignImgAltTag} />
-                  </Panel> */}
-                  <Panel shaded bodyFill style={{ display: 'inline-block', width: 240 }}>
-                    <img className='campaign-img-thumbnail' src={this.props.campaignImg} alt={this.props.campaignImgAltTag} />
-                    <Panel header={this.props.status} className="inside-panel">
-                      <h4>{this.props.campaignTitle}</h4>
-                    </Panel>
+              <FlexboxGrid.Item componentClass={Col} colspan={24} md={24}>
+                <a href={'/admin/campaign/' + this.props.campaignId}>
+                <Panel shaded style={{backgroundColor: 'transparent'}}>
+                <FlexboxGrid>
+                  {/* style={{ backgroundImage: `url('${this.props.campaignImg}')`}} */}
+                      <FlexboxGrid.Item className='panel-col' componentClass={Col} order={2} colspan={12} sm={10} style={{textAlign: 'right'}}>
+                        <img className='campaign-img-thumbnail' src={this.props.campaignImg} alt={this.props.campaignImgAltTag} />
+                      </FlexboxGrid.Item>
+                     <FlexboxGrid.Item className='panel-col panel-col-text' componentClass={Col} colspan={12} sm={14}>
+                        <h6 className='rs-panel-heading'>{this.props.status} <i style={{color: '#ddd', fontWeight: '200', textTransform: 'capitalize'}}>&nbsp;|&nbsp; Release Date: {this.props.date}</i></h6>
+                        <h4 className='rs-panel-name'>{this.props.campaignTitle}</h4>
+                      </FlexboxGrid.Item>
+                    </FlexboxGrid>
                   </Panel>
-                  </a>
+                </a>
               </FlexboxGrid.Item>
         );
   }

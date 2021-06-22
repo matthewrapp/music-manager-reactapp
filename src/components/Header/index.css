@@ -25,6 +25,15 @@
   color: #fff !important;
 }
 
+.rs-modal-content {
+  background-color: rgb(26, 23, 23) !important;
+}
+
+.rs-modal-header-close {
+  font-size: 14px !important;
+  color: #fff !important;
+}
+
 .Header .dropdown-menu ul {
   display: flex;
   flex-flow: column;

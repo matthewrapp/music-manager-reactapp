@@ -1,0 +1,47 @@
+.ArtistCard {
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+.ArtistCard .rs-panel {
+  height: 120px;
+  border-radius: 0;
+}
+
+.ArtistCard .panel-col {
+  background-color: rgb(48, 48, 48);
+  height: 120px;
+  padding: 0 20px;
+}
+
+.ArtistCard .rs-panel-name {
+  margin-top: 12px;
+  margin-left: 20px;
+  font-size: 26px !important;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.ArtistCard .rs-panel-heading {
+  font-size: 12px !important;
+  text-transform: uppercase;
+  color: rgb(255, 169, 78) !important;
+  padding: 0 !important;
+  margin-bottom: 6px;
+  margin-top: 28px;
+  margin-left: 20px;
+}
+
+.ArtistCard .rs-panel-body {
+  padding: 0 !important;
+}
+
+.ArtistCard .rs-panel-body h4 {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.ArtistCard .rs-icon-star::before {
+  margin-left: 10px;
+  color: rgb(248, 255, 40);
+}
