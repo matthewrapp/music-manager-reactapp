@@ -134,7 +134,7 @@ class AuthHeader extends Component {
             </Nav>
             <Nav pullRight>
               <Nav.Item href="/admin/campaigns" >Campaigns</Nav.Item>
-              <Nav.Item href="/profile" >Manage</Nav.Item>
+              <Nav.Item href="/admin/manage" >Manage</Nav.Item>
               <Nav.Item className='open-modal-target' onClick={this.createModalAction} >Create</Nav.Item>
             </Nav>
           </Navbar.Body>
@@ -153,7 +153,7 @@ class AuthHeader extends Component {
               <Icon style={{marginTop: '14px', marginRight: '10px', color: '#fff', float: 'right'}} icon='bars' size='2x' onClick={this.openMobileMenu}></Icon>
                 <Nav className={`dropdown-menu ${this.state.mobileMenuOpen ? '' : 'hide'}`} style={{width: '100%'}}>
                   <Nav.Item href="/admin/campaigns" >Campaigns</Nav.Item>
-                  <Nav.Item href="/profile" >Manage</Nav.Item>
+                  <Nav.Item href="/admin/manage" >Manage</Nav.Item>
                   <Nav.Item className='open-modal-target' onClick={this.createModalAction} >Create</Nav.Item>
                 </Nav>
           </Navbar.Body>

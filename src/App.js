@@ -11,6 +11,7 @@ import Campaigns from './pages/Campaigns';
 import CreateCampaign from './pages/Campaigns/Create_Campaign';
 import Profile from './pages/Profile';
 import Artists from './pages/Artists';
+import Manage from './pages/Manage';
 import Error from './pages/Error';
 // import UploadArtistImg from './pages/UploadArtistImg';
 
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path='/admin/create-campaign' component={auth(CreateCampaign)} />
           <Route path='/admin/profile' component={auth(Profile)} />
           <Route path='/admin/artists' component={auth(Artists)} />
+          <Route path='/admin/manage' component={auth(Manage)} />
           <Route component={Error} />
         </Switch>
       </div>

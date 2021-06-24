@@ -92,10 +92,10 @@ class Login extends Component {
                 <AppHeader />
                 <Content>
                     <FlexboxGrid className="col-container" justify="center" align="middle">
-                        <FlexboxGrid.Item className="col-item background-img" as={Col} colspan={24} md={12} order={2} style={{backgroundImage: `url(${backgroundImg})`}}>
+                        <FlexboxGrid.Item className="col-item background-img" componentClass={Col} colspan={24} md={12} order={2} style={{backgroundImage: `url(${backgroundImg})`}}>
                             {/* Background Image Goes Here */}
                         </FlexboxGrid.Item>
-                        <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" as={Col} colspan={24} md={12} order={1}>
+                        <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" componentClass={Col} colspan={24} md={12} order={1}>
                             <Panel header={<h3>Login</h3>}>
                             <Form ref={(ref) => {
                                     this.form = ref;
