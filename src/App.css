@@ -1,11 +1,37 @@
 a:hover {
   text-decoration: none !important;
+  cursor: pointer;
 }
 
 .rs-content {
   width: 1060px;
   /* width: 1280px; */
   margin: 0 auto;
+}
+
+.Modal .rs-modal-title {
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+.Form .rs-input {
+  border-radius: 0px;
+  background: transparent;
+  border: 1px solid rgb(81, 81, 81);
+}
+
+.Form .rs-control-label {
+  color: #fff;
+}
+
+.Form .rs-picker-date a {
+  border-radius: 0px !important;
+  background: transparent !important;
+  border: 1px solid rgb(92, 92, 92) !important;
+}
+
+.Form .rs-picker-date {
+  width: 100%;
 }
 
 @media only screen and (max-width: 1070px) {
@@ -132,4 +158,14 @@ a:hover {
 
 .mt-20 {
   margin-top: 20px;
+}
+
+.edit {
+  color: rgb(44, 209, 58);
+  background: transparent;
+}
+
+.delete {
+  color: rgb(255, 75, 65);
+  background: transparent;
 }

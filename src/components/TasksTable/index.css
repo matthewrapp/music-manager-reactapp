@@ -1,0 +1,34 @@
+.Drawer .rs-drawer-content,
+.Drawer .TasksTable,
+.Drawer .TasksTable .rs-table-cell-content {
+  background: rgb(26, 29, 36);
+}
+
+.Drawer .rs-drawer-title {
+  color: #fff !important;
+  text-transform: capitalize;
+}
+
+.Drawer .rs-drawer-body {
+  margin: 30px 20px 0px 20px;
+}
+.Drawer .TasksTable .rs-table-cell-header {
+  color: rgb(205, 205, 205);
+  text-transform: uppercase;
+}
+
+.Drawer .TasksTable .rs-table-body-wheel-area .rs-table-cell {
+  color: #fff;
+}
+
+.Drawer .TasksTable .rs-table-row {
+  border-bottom: 0.25px solid #323232;
+}
+
+.Drawer .TasksTable .rs-table-cell {
+  border-right: 0.25px solid #323232;
+}
+
+.TasksTable .rs-checkbox {
+  margin-top: -7px;
+}

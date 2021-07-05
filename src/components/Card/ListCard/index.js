@@ -4,14 +4,11 @@ import { Component } from 'react';
 
 class ListCard extends Component {
 
-    /*
-        listUrl
-        listId
-        btnValue
-        count
-        listName
-    */
-    
+    listToOpen = (e) => {
+      e.preventDefault();
+      this.props.cb(this.props.listId);
+    }
+
     render() {
         return (
               <FlexboxGrid.Item componentClass={Col} colspan={24} style={{alignContent: 'center', marginBottom: '20px'}}>
@@ -20,8 +17,8 @@ class ListCard extends Component {
                       <FlexboxGrid.Item className='panel-col' componentClass={Col} order={2} colspan={12} sm={10} style={{textAlign: 'right'}}>
                         <FlexboxGrid style={{height: '120px', alignItems: 'center', float: 'right'}}>
                             <FlexboxGrid.Item>
-                                <Button classPrefix="rs-orange-btn-sm"
-                                href={`/admin/${this.props.listUrl}-` + this.props.listId}
+                             <Button classPrefix="rs-orange-btn-sm"
+                                onClick={this.listToOpen}
                                 style={{ marginRight: '10px' }}>{this.props.btnValue}</Button>
                             </FlexboxGrid.Item>    
                         </FlexboxGrid>

@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container, Icon, IconButton } from 'rsuite';
+import { Navbar, Nav, Container, Icon, IconButton, Button } from 'rsuite';
 import { Component } from 'react';
 
 import './index.css';
@@ -21,15 +21,7 @@ class PageNav extends Component {
     }
   }
 
-  render() {
-    // let pageNavigation;
-    // if (this.props.btns !== undefined) {
-    //   this.props.btns.map((btn, index) => {
-    //     pageNavigation = <Nav.Item key={index} href={btn.btnLink} classPrefix={btn.btnClassPrefix} >{btn.btnValue}</Nav.Item>
-    //     return pageNavigation
-    //   })
-    // }
-    
+  render() {    
     return (
       <Container className="PageNav">
         <Navbar className="bg-dark-black desktop">
@@ -39,7 +31,7 @@ class PageNav extends Component {
           <Navbar.Body>
             <Nav pullRight>
               {this.props.btns !== undefined ? (this.props.btns.map((btn, index) => {
-                return <Nav.Item key={index} href={btn.btnLink} classPrefix={btn.btnClassPrefix} >{btn.btnValue}</Nav.Item>
+                return <Button className='page-nav--btn' key={index} href={btn.btnLink} onClick={() => btn.cb(btn.btnId)} classPrefix={btn.btnClassPrefix} >{btn.btnValue}</Button>
               })) : null}
             </Nav>
           </Navbar.Body>
@@ -52,7 +44,7 @@ class PageNav extends Component {
             <IconButton icon={<Icon icon='chevron-circle-down'></Icon>} classPrefix='rs-green-btn-sm' placement='right' style={{float: 'right', marginTop: '6px'}}> Actions</IconButton>
             <Nav pullRight className='action-btns hide'>
               {this.props.btns !== undefined ? (this.props.btns.map((btn, index) => {
-                return <Nav.Item key={index} href={btn.btnLink} classPrefix={btn.btnClassPrefix} >{btn.btnValue}</Nav.Item>
+                return <Button className='page-nav--btn' key={index} href={btn.btnLink} onClick={() => btn.cb(btn.btnId)} classPrefix={btn.btnClassPrefix} >{btn.btnMobileValue}</Button>
               })) : null}
             </Nav>
           </Navbar.Body>

@@ -97,7 +97,7 @@ class Login extends Component {
                         </FlexboxGrid.Item>
                         <FlexboxGrid.Item className="col-item col-item-right bg-dark-black" componentClass={Col} colspan={24} md={12} order={1}>
                             <Panel header={<h3>Login</h3>}>
-                            <Form ref={(ref) => {
+                            <Form className='Form' ref={(ref) => {
                                     this.form = ref;
                                     }} onChange={formValue => { this.setState({ formValue }) }} formValue={this.state.formValue} fluid>
                                 <FormGroup>

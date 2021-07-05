@@ -26,6 +26,10 @@
   color: #fff !important;
 }
 
+.PageNav .page-nav--btn {
+  margin-left: 14px;
+}
+
 .PageNav .page-title {
   margin-top: 14px;
   font-weight: 400;

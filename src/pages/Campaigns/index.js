@@ -1,39 +1,102 @@
 import './index.css';
-import { Row, Col, Content, Panel, Button, FlexboxGrid, Container } from 'rsuite';
-import FlexboxGridItem from 'rsuite/es/FlexboxGrid/FlexboxGridItem';
+import { Content, Panel, Button, FlexboxGrid, Container, Modal, Form, FormGroup, ControlLabel, DatePicker, ButtonToolbar, FormControl, Schema } from 'rsuite';
 import { Component } from 'react';
 import AppHeader from '../../components/Header/AuthHeader'
-// import AppFooter from '../../components/Footer';
 import CampaignCard from '../../components/Card/CampaignCard';
 import PageNav from '../../components/PageNav';
 
-import { authCookie } from '../../helper';
-
-/*
-This class displays all the campaigns/songs related to the user/artists
-*/
+import { authCookie , artistIdCookie} from '../../helper';
+const { StringType, DateType } = Schema.Types;
 class Campaigns extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            noArtists: false,
             numOfCampaigns: 0,
             campaigns: [],
             profileInfo: {
                 name: null
-            }
+            },
+            formValue: {
+                songName: '',
+                releaseDate: new Date()
+            },
+            createNewCampaignModalOpen: false,
+            formError: {}
         }
-        // HandleSubmit relies on this.state
-        // this guarantees that handleSubmit, no matter where you call it, will always be in the context of the login component aka 'this'
-        // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    componentDidMount = async (e) => {
-        // Check to see if there is a cookie that already exists. If so, set auth to True and move on.
-            // that means that we are authenticated, now check to see if there are artists...
-        
-        // issue is I need to select the right cookie to split and send in authorization
+    handleFormDataChange = (value) => {
+        this.setState({
+            formValue: value
+        })
+    }
+
+    createNewCampaign = async (formData) => {
         const token = await authCookie(document.cookie).then(t => t);
-        fetch(`${process.env.REACT_APP_API}/api/get-campaigns`, {
+        const artistId = await artistIdCookie(document.cookie).then(a => a);
+        let data;
+        if (!this.state.createNewCampaignModalOpen) {
+            return this.setState({
+                createNewCampaignModalOpen: true
+            })
+        }
+
+        if (this.state.createNewCampaignModalOpen) {
+            if (!this.form.check()) {
+                return
+            }
+
+            data = {
+                songName: this.state.formValue.songName,
+                releaseDate: this.state.formValue.releaseDate,
+                artistId: artistId.split('=')[1]
+            }
+
+            fetch(`${process.env.REACT_APP_API}/api/create-campaign`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token.split('=')[1]}`
+                },
+                body: JSON.stringify(data)
+            })
+            .then(data => {
+                const jsonData = data.json();
+                return jsonData;
+            })
+            .then(jsonData => {
+                this.getCampaigns();
+                return
+            })
+            .catch(err => {
+                throw new Error(err);
+            })
+
+            return this.closeModal();
+        }
+    }
+
+    closeModal = (e) => {
+        return this.setState({
+            formValue: {
+                songName: '',
+                releaseDate: new Date()
+            },
+            createNewCampaignModalOpen: false
+        })
+    }
+
+    getCampaigns = async () => {
+        const token = await authCookie(document.cookie).then(t => t);
+        const artistId = await artistIdCookie(document.cookie).then(a => a);
+        if (artistId.split('=')[1] === undefined || artistId.split('=')[1] === 'undefined') {
+            return this.setState({
+                noArtists: true
+            })
+        } 
+
+        fetch(`${process.env.REACT_APP_API}/api/get-campaigns/?${artistId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token.split('=')[1]}`
@@ -43,42 +106,45 @@ class Campaigns extends Component {
                 return campaigns.json()
             })
             .then(campaigns => {
-                if (campaigns.campaigns.length < 1) {
-                    return this.setState({
-                        ...this.state.numOfArtists,
-                        ...this.state.artists
-                    })
-                }
+                // if (campaigns.campaigns.length < 1) {
+                //     return
+                // }
                 return this.setState({
                     numOfCampaigns: campaigns.campaigns.length,
                     campaigns: campaigns.campaigns
                 })
             })
     }
+
+    componentDidMount = (e) => {
+        this.getCampaigns();
+    }
     
     render() {
 
-        if (this.state.numOfArtists < 1) {
+        const model = Schema.Model({
+            songName: StringType().isRequired('This field is required.'),
+            releaseDate: DateType().isRequired('This field is required.')
+        });
+
+        if (this.state.noArtists) {
             return (
                 <div className="Campaigns">
                     <Container>
                         <AppHeader />
                         <Content>
-                            <Row>
-                                <Col>
-                                    <Panel shaded >
-                                        <FlexboxGrid justify='space-between'>
-                                            <FlexboxGridItem>
-                                                <h4>Currently, you have no artists.</h4>
-                                                <p>Create an artist to get started.</p>
-                                            </FlexboxGridItem>
-                                            <FlexboxGridItem>
-                                                <Button classPrefix="orange-btn" href="https://facebook.com/" type="submit">Create An Artist</Button>
-                                            </FlexboxGridItem>
-                                        </FlexboxGrid>
-                                    </Panel>
-                                </Col>
-                            </Row>
+                            <PageNav pageName="Campaigns" />
+                            <Panel shaded >
+                                <FlexboxGrid justify='space-between'>
+                                    <FlexboxGrid.Item>
+                                        <h4>Currently, you have no artists.</h4>
+                                        <p>Create an artist to get started.</p>
+                                    </FlexboxGrid.Item>
+                                    <FlexboxGrid.Item style={{alignSelf: 'center'}}>
+                                        <Button classPrefix="rs-orange-btn-sm" href="https://facebook.com/" type="submit">Create An Artist</Button>
+                                    </FlexboxGrid.Item>
+                                </FlexboxGrid>
+                            </Panel>
                         </Content>
                     </Container>
                 </div>
@@ -87,18 +153,11 @@ class Campaigns extends Component {
 
         const btnArray = [
             {
-                btnValue: 'View All Campaigns',
-                btnMobileValue: 'View',
-                btnLink: 'https://facebook.com/',
-                btnClassPrefix: 'rs-blue-btn-sm',
-                btnId: 1
-            },
-            {
                 btnValue: 'Create New Campaign',
-                btnMobileValue: 'Create',
-                btnLink: 'https://instagram.com/',
+                btnMobileValue: 'View',
+                cb: this.createNewCampaign,
                 btnClassPrefix: 'rs-green-btn-sm',
-                btnId: 2
+                btnId: 'create-new-campaign-btn'
             }
         ]
         
@@ -106,15 +165,43 @@ class Campaigns extends Component {
             <div className="Campaigns">
             <Container>
                 <AppHeader />
-                    <Content>
-                        <PageNav pageName="Campaigns" btns={btnArray} />
-                        <FlexboxGrid className="CampaignCard" justify="space-between">
-                            {this.state.campaigns.map(campaign => {
-                                return <CampaignCard key={campaign._id} campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
-                            })}
-                        </FlexboxGrid>        
+                <Content>
+                    <PageNav pageName="Campaigns" btns={btnArray} />
+                    <FlexboxGrid className="CampaignCard" justify="space-between">
+                        {this.state.campaigns.map(campaign => {
+                            return <CampaignCard key={campaign._id} campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
+                        })}
+                    </FlexboxGrid>        
                 </Content>
-                {/* <AppFooter /> */}
+                <Modal className='Modal' show={this.state.createNewCampaignModalOpen} onHide={this.closeModal} size='xs'>
+                    <Modal.Header>
+                        <Modal.Title>Create A Campaign</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form model={model} className='Form' fluid
+                        ref={ref => (this.form = ref)}
+                        onCheck={formError => { this.setState({ formError: formError }) }}
+                        onChange={this.handleFormDataChange}
+                        formValue={this.state.formValue}
+                    >
+                        <FormGroup>
+                            <ControlLabel>Song Name</ControlLabel>
+                            <FormControl name="songName" type="text" />
+                        </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Release Date</ControlLabel>
+                            <FormControl accepter={DatePicker} name="releaseDate" placeholder='Select Release Date'/>
+                        </FormGroup>        
+                        <FormGroup>
+                            <ButtonToolbar className="right">
+                                <Button classPrefix="rs-orange-btn-lg"
+                                        onClick={this.createNewCampaign}
+                                        type="submit">Create Campaign</Button>
+                            </ButtonToolbar>
+                        </FormGroup>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
             </Container>
         </div>
         )

@@ -1,0 +1,30 @@
+.Drawer .rs-drawer-content,
+.Drawer .ContactTable,
+.Drawer .ContactTable .rs-table-cell-content {
+  background: rgb(26, 29, 36);
+}
+
+.Drawer .rs-drawer-title {
+  color: #fff !important;
+  text-transform: capitalize;
+}
+
+.Drawer .rs-drawer-body {
+  margin: 30px 20px 0px 20px;
+}
+.Drawer .ContactTable .rs-table-cell-header {
+  color: rgb(205, 205, 205);
+  text-transform: uppercase;
+}
+
+.Drawer .ContactTable .rs-table-body-wheel-area .rs-table-cell {
+  color: #fff;
+}
+
+.Drawer .ContactTable .rs-table-row {
+  border-bottom: 0.25px solid #323232;
+}
+
+.Drawer .ContactTable .rs-table-cell {
+  border-right: 0.25px solid #323232;
+}

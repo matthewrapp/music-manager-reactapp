@@ -25,7 +25,7 @@ class PressReleasesSection extends Component {
             return (
                 <FlexboxGrid className="ListCard" justify="space-between">
                     <FlexboxGrid.Item componentClass={Col} colspan={24}>
-                        <ListCard listId='template1' listUrl='press-releases' btnValue='View Press Release' count={this.props.allPressReleases.length} listName='Press Release Template #1' />
+                        <ListCard listId='pr.template1' listUrl='press-releases' btnValue='View Press Release' count={this.props.allPressReleases.length} listName='Press Release Template #1' />
                     </FlexboxGrid.Item>
                 </FlexboxGrid>        
             )

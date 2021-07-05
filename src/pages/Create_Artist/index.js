@@ -36,8 +36,6 @@ class CreateArtist extends Component {
         let stepper = this.state.currentStep;
         stepper += 1;
         this.setState({
-            ...this.state.formValue,
-            ...this.state.formError,
             hasValidationError: true,
             currentStep: stepper
         })
@@ -48,16 +46,9 @@ class CreateArtist extends Component {
         let stepper = this.state.currentStep;
         stepper -= 1;
         this.setState({
-            ...this.state.formValue,
-            ...this.state.formError,
-            ...this.state.hasValidationError,
             currentStep: stepper,
         })
     }
-
-    // validate = (artistName, artistBio, facebook, instagram, soundcloud) => {
-    //     if (artistName.maxLength === 0)
-    // }
 
     handleSubmit = async (e) => {
         // e.preventDefault();
@@ -86,9 +77,7 @@ class CreateArtist extends Component {
                 instagram: '',
                 soundcloud: ''
             },
-            ...this.state.formError,
             hasValidationError: true,
-            ...this.state.currentStep,
         });
 
         const token = await authCookie(document.cookie).then(t => t);
@@ -108,9 +97,6 @@ class CreateArtist extends Component {
                 let stepper = this.state.currentStep;
                 stepper += 1;
                 this.setState({
-                    ...this.state.formValue,
-                    ...this.state.formError,
-                    ...this.state.hasValidationError,
                     currentStep: stepper,
                 });
                 return
@@ -125,7 +111,7 @@ class CreateArtist extends Component {
         if (this.state.currentStep > 2) {
             return (
                 <Redirect to={{
-                    pathname: '/admin/upload-artist-image',
+                    pathname: '/admin/campaigns',
                 }} />
             )
         }
@@ -153,7 +139,7 @@ class CreateArtist extends Component {
                                 <Panel header={<h3>Create Artist, Step {this.state.currentStep}</h3>}>
                                     <Form model={model}
                                         onChange={formValue => { this.setState({ formValue }) }}
-                                        onCheck={formError => { console.log(Object.keys(formError)); this.setState({ formError: formError, hasValidationError: (Object.keys(formError).length === 0 ? false : true) }) }}
+                                        onCheck={formError => { this.setState({ formError: formError, hasValidationError: (Object.keys(formError).length === 0 ? false : true) }) }}
                                         formValue={this.props.formValue}
                                         fluid>
                                         <Step1 onClick={this.handleSubmit} error={this.state.hasValidationError} currentStep={this.state.currentStep} artistName={this.state.formValue.artistName} artistBio={this.state.formValue.artistBio} />

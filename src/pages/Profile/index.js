@@ -122,7 +122,7 @@ class Profile extends Component {
                         </FlexboxGrid.Item>
                         <FlexboxGrid.Item componentClass={Col} colspan={24} md={16}>
                             <Panel>
-                                <Form model={model}
+                                <Form className='Form' model={model}
                                     ref={(ref) => { this.form = ref; }}
                                     onChange={formValue => {
                                         this.setState({ formValue })
@@ -173,15 +173,13 @@ class Profile extends Component {
                             </Panel>
                         </FlexboxGrid.Item>
                     </FlexboxGrid>
-                </Content>
-                <div className='modal-container desktop-modal'>
-                    <Modal show={this.state.openImgModal} onHide={this.openImgWidget} size='sm' autoFocus >
-                        <Modal.Header />    
-                        <Modal.Body>
-                            <UploadImg url='/api/upload-user-img' cb={this.cb}/>
-                        </Modal.Body>
-                    </Modal>
-                </div>    
+                </Content>  
+                <Modal className='Modal' show={this.state.openImgModal} onHide={this.openImgWidget} size='xs' autoFocus >
+                    <Modal.Header><Modal.Title>Upload New Profile Image</Modal.Title></Modal.Header>    
+                    <Modal.Body>
+                        <UploadImg url='/api/upload-user-img' cb={this.cb}/>
+                    </Modal.Body>
+                </Modal> 
             </Container>
         </div>
         )
