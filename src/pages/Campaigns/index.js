@@ -19,7 +19,7 @@ class Campaigns extends Component {
             },
             formValue: {
                 songName: '',
-                releaseDate: new Date()
+                releaseDate: new Date(),
             },
             createNewCampaignModalOpen: false,
             formError: {}
@@ -32,10 +32,14 @@ class Campaigns extends Component {
         })
     }
 
-    createNewCampaign = async (formData) => {
+    createNewCampaign = async () => {
         const token = await authCookie(document.cookie).then(t => t);
         const artistId = await artistIdCookie(document.cookie).then(a => a);
-        let data;
+
+        this.setState({
+            numOfCampaigns: undefined
+        })
+
         if (!this.state.createNewCampaignModalOpen) {
             return this.setState({
                 createNewCampaignModalOpen: true
@@ -47,7 +51,7 @@ class Campaigns extends Component {
                 return
             }
 
-            data = {
+            let data = {
                 songName: this.state.formValue.songName,
                 releaseDate: this.state.formValue.releaseDate,
                 artistId: artistId.split('=')[1]
@@ -90,6 +94,7 @@ class Campaigns extends Component {
     getCampaigns = async () => {
         const token = await authCookie(document.cookie).then(t => t);
         const artistId = await artistIdCookie(document.cookie).then(a => a);
+
         if (artistId.split('=')[1] === undefined || artistId.split('=')[1] === 'undefined') {
             return this.setState({
                 noArtists: true
@@ -106,9 +111,9 @@ class Campaigns extends Component {
                 return campaigns.json()
             })
             .then(campaigns => {
-                // if (campaigns.campaigns.length < 1) {
-                //     return
-                // }
+                if (campaigns.campaigns.length < 1) {
+                    return
+                }
                 return this.setState({
                     numOfCampaigns: campaigns.campaigns.length,
                     campaigns: campaigns.campaigns
@@ -141,7 +146,30 @@ class Campaigns extends Component {
                                         <p>Create an artist to get started.</p>
                                     </FlexboxGrid.Item>
                                     <FlexboxGrid.Item style={{alignSelf: 'center'}}>
-                                        <Button classPrefix="rs-orange-btn-sm" href="https://facebook.com/" type="submit">Create An Artist</Button>
+                                        <Button classPrefix="rs-orange-btn-sm" href="/admin/artists" type="submit">Create An Artist</Button>
+                                    </FlexboxGrid.Item>
+                                </FlexboxGrid>
+                            </Panel>
+                        </Content>
+                    </Container>
+                </div>
+            )
+        }
+        if (this.state.numOfCampaigns === 0) {
+            return (
+                <div className="Campaigns">
+                    <Container>
+                        <AppHeader />
+                        <Content>
+                            <PageNav pageName="Campaigns" />
+                            <Panel shaded >
+                                <FlexboxGrid justify='space-between'>
+                                    <FlexboxGrid.Item>
+                                        <h4>Currently, you have no campaigns.</h4>
+                                        <p>Create a campaigns to get started.</p>
+                                    </FlexboxGrid.Item>
+                                    <FlexboxGrid.Item style={{alignSelf: 'center'}}>
+                                        <Button classPrefix="rs-orange-btn-sm"onClick={this.createNewCampaign} type="submit">Create A Campaign</Button>
                                     </FlexboxGrid.Item>
                                 </FlexboxGrid>
                             </Panel>
@@ -169,7 +197,7 @@ class Campaigns extends Component {
                     <PageNav pageName="Campaigns" btns={btnArray} />
                     <FlexboxGrid className="CampaignCard" justify="space-between">
                         {this.state.campaigns.map(campaign => {
-                            return <CampaignCard key={campaign._id} campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
+                            return <CampaignCard campaign={campaign} key={campaign._id} campaignId={campaign._id} status={campaign.campaignStatus} date={campaign.releaseDate.split('T')[0]} campaignTitle={campaign.songName} campaignImg={campaign.artworkUrl+'100x100'} campaignImgAltTag={campaign.songName} />
                         })}
                     </FlexboxGrid>        
                 </Content>

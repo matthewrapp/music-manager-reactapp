@@ -52,20 +52,12 @@ class Profile extends Component {
     openImgWidget = async (e) => {
         if (e.target.classList.contains('open-modal-target')) {
             this.setState({
-                ...this.state.formValue,
-                ...this.state.formError,
-                ...this.state.hasValidationError,
-                ...this.state.success,
                 openImgModal: true
             })
         }
 
         if (e.target.classList.contains('rs-modal-header-close')) {
             this.setState({
-                ...this.state.formValue,
-                ...this.state.formError,
-                ...this.state.hasValidationError,
-                ...this.state.success,
                 openImgModal: false
             })
         }
@@ -94,10 +86,7 @@ class Profile extends Component {
                         profileFirstName: user.firstName,
                         profileLastName: user.lastName,
                         profileEmail: user.email
-                    },
-                    ...this.state.formError,
-                    ...this.state.hasValidationError,
-                    ...this.state.success
+                    }
                 })
             })
     }

@@ -11,7 +11,7 @@ class ListCard extends Component {
 
     render() {
         return (
-              <FlexboxGrid.Item componentClass={Col} colspan={24} style={{alignContent: 'center', marginBottom: '20px'}}>
+              <FlexboxGrid.Item className='ListCardItem' componentClass={Col} colspan={24} style={{alignContent: 'center', marginBottom: '20px'}}>
                 <Panel shaded>
                 <FlexboxGrid>
                       <FlexboxGrid.Item className='panel-col' componentClass={Col} order={2} colspan={12} sm={10} style={{textAlign: 'right'}}>

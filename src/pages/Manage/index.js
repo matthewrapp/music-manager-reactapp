@@ -7,7 +7,7 @@ import ContactTable from '../../components/ContactTable';
 import TasksTable from '../../components/TasksTable';
 import ContactsSection from './ContactsSection';
 import TasksSection from './TasksSection';
-import PressReleasesSection from './PressReleasesSection';
+// import PressReleasesSection from './PressReleasesSection';
 
 import { authCookie } from '../../helper';
 
@@ -60,7 +60,7 @@ class Manage extends Component {
                 return contacts.json()
             })
             .then(contacts => {
-                if (contacts.result.length < 1) {
+                if (contacts.result === undefined || contacts.result.length < 1) {
                     return this.setState({
                         contacts: {
                             all: [],
@@ -114,7 +114,7 @@ class Manage extends Component {
                 return tasks.json()
             })
             .then(tasks => {
-                if (tasks.result.length < 1) {
+                if (tasks.result === undefined || tasks.result.length < 1) {
                     return this.setState({
                         tasks: {
                             all: [],
@@ -461,24 +461,23 @@ class Manage extends Component {
             }
         ]
 
-        const prsBtnArray = [
-            {
-                btnValue: 'View All Press Release Templates',
-                btnMobileValue: 'View',
-                cb: this.viewAllLists,
-                btnLink: 'https://facebook.com/',
-                btnClassPrefix: 'rs-blue-btn-sm',
-                btnId: 1
-            },
-            {
-                btnValue: 'Create New Template',
-                btnMobileValue: 'Create',
-                btnLink: 'https://facebook.com/',
-                btnClassPrefix: 'rs-green-btn-sm',
-                btnId: 2
-            }
-        ]
-        // console.log(this.state.contacts.all)
+        // const prsBtnArray = [
+        //     {
+        //         btnValue: 'View All Press Release Templates',
+        //         btnMobileValue: 'View',
+        //         cb: this.viewAllLists,
+        //         btnLink: 'https://facebook.com/',
+        //         btnClassPrefix: 'rs-blue-btn-sm',
+        //         btnId: 1
+        //     },
+        //     {
+        //         btnValue: 'Create New Template',
+        //         btnMobileValue: 'Create',
+        //         btnLink: 'https://facebook.com/',
+        //         btnClassPrefix: 'rs-green-btn-sm',
+        //         btnId: 2
+        //     }
+        // ]
 
         return (
                 <div className="Manage">
@@ -489,8 +488,8 @@ class Manage extends Component {
                                 <ContactsSection sectionName='contact-section' allContacts={this.state.contacts.all} spotifyContacts={this.state.contacts.spotify} appleContacts={this.state.contacts.apple} youtubeContacts={this.state.contacts.youtube} blogContacts={this.state.contacts.blog} labelContacts={this.state.contacts.label} fanContacts={this.state.contacts.fan} cb={this.listToOpen} viewAllLists={this.state.viewAllContactLists} createNewContact={this.createNewContact} openModal={this.state.createNewContactModalOpen} closeModal={this.closeModal}/>
                                 <PageNav pageName="Task Boards" btns={tasksBtnArray} />
                                 <TasksSection sectionName='task-section' allTasks={this.state.tasks.all} socialTasks={this.state.tasks.social} subTasks={this.state.tasks.submissions} creativeTasks={this.state.tasks.submissions} otherTasks={this.state.tasks.submissions} cb={this.listToOpen} viewAllLists={this.state.viewAllTaskLists} createNewTask={this.createNewTask} openModal={this.state.createNewTaskModalOpen} closeModal={this.closeModal}/>
-                                <PageNav pageName="Press Releases" btns={prsBtnArray} />
-                                <PressReleasesSection cb={this.listToOpen} />
+                                {/* <PageNav pageName="Press Releases" btns={prsBtnArray} /> */}
+                                {/* <PressReleasesSection cb={this.listToOpen} /> */}
 
                                 {this.state.list.listIdToOpen === 'contacts.all' &&
                                     <ContactTable 

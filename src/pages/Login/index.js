@@ -52,21 +52,16 @@ class Login extends Component {
                 alert(jsonData.message);
                 return
             }
-
             // set cookie with token in it
             let d = new Date();
             d.setTime(d.getTime() + (5 * 24 * 60 * 1000));
             let expires = "expires=" + d.toUTCString();
-            // document.cookie = `auth=${jsonData.token}` + ';' + expires + ";path=/";
             document.cookie = `auth=${jsonData.token};${expires};path=/`;
-
             // set cookie with default artist
             document.cookie=`artistId=${jsonData.selectedArtist}`
             
             this.setState({
-                ...this.state.formValue,
                 isAuth: true,
-                ...this.state.errMessage
             })
 
             return

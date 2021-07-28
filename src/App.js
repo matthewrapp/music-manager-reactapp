@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateArtist from './pages/Create_Artist';
 import Campaigns from './pages/Campaigns';
+import CampaignPage from './pages/CampaignPage';
 import Profile from './pages/Profile';
 import Artists from './pages/Artists';
 import Manage from './pages/Manage';
@@ -30,6 +31,7 @@ class App extends Component {
           <Route path='/register' component={Register} />
           <Route path='/admin/create-artist' component={auth(CreateArtist)} />
           <Route path='/admin/campaigns' component={auth(Campaigns)} />
+          <Route path='/admin/campaign' component={auth(CampaignPage)} />
           <Route path='/admin/profile' component={auth(Profile)} />
           <Route path='/admin/artists' component={auth(Artists)} />
           <Route path='/admin/manage' component={auth(Manage)} />

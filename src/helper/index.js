@@ -29,3 +29,8 @@ export const eraseCookie = async (cookie) => {
     document.cookie = `${cookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
     return
 }
+
+export const setArtistCookie = async (cookieName, id) => {
+    document.cookie = cookieName + "=" + id + ";";
+    return
+}

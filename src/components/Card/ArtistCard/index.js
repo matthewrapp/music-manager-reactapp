@@ -13,14 +13,14 @@ class ArtistCard extends Component {
                       <FlexboxGrid.Item className='panel-col' componentClass={Col} order={2} colspan={12} sm={10} style={{textAlign: 'right'}}>
                         <FlexboxGrid style={{height: '120px', alignItems: 'center', float: 'right'}}>
                             <FlexboxGrid.Item>
-                                <Button classPrefix="rs-red-btn-sm"
-                                    onClick={this.deleteArtist}
+                                <Button className='delete-artist-btn' classPrefix="rs-red-btn-sm"
+                                    onClick={(e) => this.props.cb(e.target, this.props.artistId)}
                                     style={{marginRight: '10px'}}>Delete Artist</Button>
                             </FlexboxGrid.Item>
                             <FlexboxGrid.Item>
-                                <Button classPrefix="rs-blue-btn-sm"
-                                    href={'/admin/artist-' + this.props.artistId}
-                                    style={{marginRight: '10px'}}>Edit Artist</Button>
+                                <Button className='view-artist-btn' classPrefix="rs-blue-btn-sm"
+                                    onClick={(e) => this.props.cb(e.target, this.props.artistId)}
+                                    style={{marginRight: '10px'}}>View Artist</Button>
                             </FlexboxGrid.Item>    
                         </FlexboxGrid>
                       </FlexboxGrid.Item>
